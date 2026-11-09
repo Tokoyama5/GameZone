@@ -3,48 +3,79 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GameZone</title>
+<meta name="theme-color" content="#080b14">
+<title>GameZone | Play. Explore. Repeat.</title>
 <style>
 :root{--bg:#080b14;--panel:#111827;--panel2:#172033;--text:#eef2ff;--muted:#9aa7bd;--cyan:#35e0d0;--pink:#ff4fa3;--line:#26334a}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% 0,#172044 0,transparent 34%),var(--bg);color:var(--text);font:16px/1.5 system-ui,Arial,sans-serif}
-header{padding:22px max(20px,calc((100% - 1100px)/2));border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px}
+header{padding:20px max(20px,calc((100% - 1100px)/2));border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px}
 .logo{font-size:1.55rem;font-weight:900;letter-spacing:1px}.logo span{color:var(--cyan)}nav a{color:var(--muted);text-decoration:none;margin-left:18px}
-main{max-width:1100px;margin:auto;padding:38px 20px}.hero{padding:38px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(120deg,#141e35,#101525 65%,#25132c);box-shadow:0 18px 60px #0006}
-.eyebrow{color:var(--cyan);font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:.78rem}h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);max-width:620px}
-.controls{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}.controls input,.controls select{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:13px 15px;border-radius:12px;font:inherit}.controls input{flex:1;min-width:190px}
-h2{margin-top:36px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:17px}.game{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;transition:.2s}.game:hover{transform:translateY(-4px);border-color:var(--cyan)}.art{height:120px;border-radius:12px;display:grid;place-items:center;font-size:3rem;background:linear-gradient(135deg,#1a3150,#3b1744);margin-bottom:14px}.tag{color:var(--cyan);font-size:.8rem}.game p{color:var(--muted);min-height:48px}.btn{border:0;border-radius:10px;background:linear-gradient(90deg,var(--cyan),#70a8ff);color:#06111a;font-weight:800;padding:11px 16px;cursor:pointer}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
-footer{text-align:center;color:var(--muted);padding:35px 15px;border-top:1px solid var(--line);margin-top:50px}
-.modal{display:none;position:fixed;inset:0;background:#000c;z-index:5;place-items:center;padding:15px}.modal.show{display:grid}.dialog{width:min(560px,100%);background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}.dialogtop{display:flex;justify-content:space-between;align-items:center}.gamearea{background:#080d17;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}canvas{max-width:100%;background:#050910;border-radius:8px}.score{color:var(--cyan);font-weight:800}.mobile{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}.mobile button{min-width:48px}
+main{max-width:1100px;margin:auto;padding:34px 20px}.hero{padding:36px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(120deg,#141e35,#101525 65%,#25132c);box-shadow:0 18px 60px #0006}
+.eyebrow{color:var(--cyan);font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:.78rem}h1{font-size:clamp(2.2rem,6vw,4rem);line-height:1.05;margin:12px 0}.hero p{color:var(--muted);max-width:650px}
+.notice{display:flex;align-items:center;gap:12px;margin:18px 0;padding:14px 16px;border:1px solid #59436b;background:#1c1730;border-radius:14px;color:#e9d9ff}.notice strong{color:#ffb8df}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}.controls input,.controls select{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:13px 15px;border-radius:12px;font:inherit}.controls input{flex:1;min-width:190px}
+h2{margin-top:34px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:17px}.game{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px;transition:.2s}.game:hover{transform:translateY(-4px);border-color:var(--cyan)}.art{height:120px;border-radius:12px;display:grid;place-items:center;font-size:3rem;background:linear-gradient(135deg,#1a3150,#3b1744);margin-bottom:14px}.tag{color:var(--cyan);font-size:.8rem}.game p{color:var(--muted);min-height:48px}.btn{border:0;border-radius:10px;background:linear-gradient(90deg,var(--cyan),#70a8ff);color:#06111a;font-weight:800;padding:11px 16px;cursor:pointer}.btn.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}
+footer{text-align:center;color:var(--muted);padding:35px 15px;border-top:1px solid var(--line);margin-top:48px}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:5;place-items:center;padding:15px;overflow:auto}.modal.show{display:grid}.dialog{width:min(560px,100%);max-height:94vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}.dialogtop{display:flex;justify-content:space-between;align-items:center;gap:10px}.gamearea{background:#080d17;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}.score{color:var(--cyan);font-weight:800}
+canvas{max-width:100%;background:#050910;border-radius:8px;touch-action:none}.mobile{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:12px}.mobile button{min-width:48px}
+.board2048{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:360px;margin:12px auto;padding:8px;background:#273449;border-radius:12px;touch-action:pan-y}.tile{aspect-ratio:1;display:grid;place-items:center;border-radius:8px;background:#34445d;color:white;font-size:clamp(1.1rem,5vw,1.8rem);font-weight:900}.tile.v0{background:#172033}.tile.v2{background:#dce5f2;color:#253047}.tile.v4{background:#b9d8e8;color:#253047}.tile.v8{background:#55cfc4;color:#09252a}.tile.v16{background:#37aeb5}.tile.v32{background:#397fba}.tile.v64{background:#5366c5}.tile.v128,.tile.v256,.tile.v512,.tile.v1024,.tile.v2048{background:#b64e9a}
+.game-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
 @media(max-width:600px){header{align-items:flex-start;flex-direction:column}nav a{margin:0 14px 0 0}main{padding-top:22px}.hero{padding:26px 20px}}
 </style>
 </head>
 <body>
 <header><div class="logo">GAME<span>ZONE</span></div><nav><a href="#games">Games</a><a href="#about">About</a></nav></header>
 <main>
-<section class="hero"><div class="eyebrow">Your next level starts here</div><h1>PLAY. EXPLORE.<br><span style="color:var(--cyan)">REPEAT.</span></h1><p>Welcome to GameZone, a small gaming hub built for fun. Discover the games below and try the playable Snake mini-game.</p><a href="#games"><button class="btn">Explore games</button></a></section>
-<div class="controls"><input id="search" placeholder="Search games..." aria-label="Search games"><select id="filter" aria-label="Filter games"><option value="all">All categories</option><option value="arcade">Arcade</option><option value="puzzle">Puzzle</option><option value="action">Action</option></select></div>
-<section id="games"><h2>Featured games</h2><div class="grid" id="grid">
-<article class="game" data-category="arcade" data-name="snake"><div class="art">🐍</div><span class="tag">ARCADE · PLAYABLE</span><h3>Snake</h3><p>Eat, grow, and try to beat your best score.</p><button class="btn" onclick="openSnake()">Play now</button></article>
-<article class="game" data-category="puzzle" data-name="memory match"><div class="art">🧠</div><span class="tag">PUZZLE · COMING SOON</span><h3>Memory Match</h3><p>Flip cards and find matching pairs.</p><button class="btn secondary" onclick="soon()">Coming soon</button></article>
-<article class="game" data-category="action" data-name="space run"><div class="art">🚀</div><span class="tag">ACTION · COMING SOON</span><h3>Space Run</h3><p>Race through the stars in a future update.</p><button class="btn secondary" onclick="soon()">Coming soon</button></article>
+<section class="hero"><div class="eyebrow">Your next level starts here</div><h1>PLAY. EXPLORE.<br><span style="color:var(--cyan)">REPEAT.</span></h1><p>A mini gaming hub for quick breaks, simple challenges, and new games.</p><a href="#games"><button class="btn">Explore games</button></a></section>
+<div class="notice"><span>🚧</span><div><strong>GameZone is under development.</strong><br>New games and features are coming soon. Stay tuned!</div></div>
+<div class="controls"><input id="search" placeholder="Search games..." aria-label="Search games"><select id="filter" aria-label="Filter games"><option value="all">All categories</option><option value="arcade">Arcade</option><option value="puzzle">Puzzle</option></select></div>
+<section id="games"><h2>Mini games</h2><div class="grid" id="grid">
+<article class="game" data-category="arcade" data-name="snake"><div class="art">🐍</div><span class="tag">ARCADE · PLAYABLE</span><h3>Snake</h3><p>Eat, grow, and try to beat your best score.</p><button class="btn" onclick="openModal('snakeModal');startSnake()">Play now</button></article>
+<article class="game" data-category="puzzle" data-name="2048 number puzzle"><div class="art">🔢</div><span class="tag">PUZZLE · PLAYABLE</span><h3>2048</h3><p>Combine matching numbers and reach the 2048 tile.</p><button class="btn" onclick="openModal('puzzleModal');new2048()">Play now</button></article>
+<article class="game" data-category="puzzle" data-name="memory match"><div class="art">🧠</div><span class="tag">PUZZLE · COMING SOON</span><h3>Memory Match</h3><p>A quick memory challenge is on the way.</p><button class="btn secondary" onclick="comingSoon()">Coming soon</button></article>
 </div></section>
-<section id="about"><h2>About GameZone</h2><p style="color:var(--muted)">GameZone is an independent mini gaming website. More games and features can be added over time.</p></section>
-</main><footer>© 2026 GameZone · Built for players</footer>
-<div class="modal" id="modal"><div class="dialog"><div class="dialogtop"><h2>🐍 Snake</h2><button class="btn secondary" onclick="closeSnake()">Close</button></div><div class="gamearea"><p>Score: <span class="score" id="score">0</span> · Best: <span class="score" id="best">0</span></p><canvas id="board" width="360" height="360"></canvas><p id="status">Use arrow keys or WASD to move.</p><button class="btn" onclick="startGame()">Restart</button><button class="btn secondary" onclick="togglePause()">Pause</button><div class="mobile"><button class="btn secondary" onclick="turn(0,-1)">↑</button><button class="btn secondary" onclick="turn(-1,0)">←</button><button class="btn secondary" onclick="turn(0,1)">↓</button><button class="btn secondary" onclick="turn(1,0)">→</button></div></div></div></div>
+<section id="about"><h2>About GameZone</h2><p style="color:var(--muted)">GameZone is an independent mini gaming website. We are building it step by step, with more lightweight games and features coming soon.</p></section>
+</main><footer>© 2026 GameZone · More fun is loading...</footer>
+
+<div class="modal" id="snakeModal"><div class="dialog"><div class="dialogtop"><h2>🐍 Snake</h2><button class="btn secondary" onclick="closeModal('snakeModal');clearInterval(snakeTimer)">Close</button></div><div class="gamearea"><p>Score: <span class="score" id="snakeScore">0</span> · Best: <span class="score" id="snakeBest">0</span></p><canvas id="board" width="360" height="360"></canvas><p id="snakeStatus">Use arrow keys or WASD.</p><div class="game-actions"><button class="btn" onclick="startSnake()">Restart</button><button class="btn secondary" onclick="pauseSnake()">Pause</button></div><div class="mobile"><button class="btn secondary" onclick="snakeTurn(0,-1)">↑</button><button class="btn secondary" onclick="snakeTurn(-1,0)">←</button><button class="btn secondary" onclick="snakeTurn(0,1)">↓</button><button class="btn secondary" onclick="snakeTurn(1,0)">→</button></div></div></div></div>
+
+<div class="modal" id="puzzleModal"><div class="dialog"><div class="dialogtop"><h2>🔢 2048</h2><button class="btn secondary" onclick="closeModal('puzzleModal')">Close</button></div><div class="gamearea"><p>Score: <span class="score" id="pScore">0</span> · Best: <span class="score" id="pBest">0</span></p><div class="board2048" id="board2048"></div><p id="pStatus">Use arrow keys, WASD, or swipe to move.</p><div class="game-actions"><button class="btn" onclick="new2048()">New game</button><button class="btn secondary" onclick="undo2048()">Undo</button></div></div></div></div>
+
 <script>
 const search=document.getElementById('search'),filter=document.getElementById('filter');
-function update(){document.querySelectorAll('.game').forEach(c=>{let ok=c.dataset.name.includes(search.value.toLowerCase())&&(filter.value==='all'||c.dataset.category===filter.value);c.style.display=ok?'':'none'})}
-search.addEventListener('input',update);filter.addEventListener('change',update);
-function soon(){alert('This game is coming in a future GameZone update!')}
-const modal=document.getElementById('modal'),canvas=document.getElementById('board'),ctx=canvas.getContext('2d'),cell=18;
-let snake,food,dir,next,score,timer,paused=false,over=false;
-let best=Number(localStorage.getItem('gz-best')||0);document.getElementById('best').textContent=best;
-function openSnake(){modal.classList.add('show');startGame()}function closeSnake(){modal.classList.remove('show');clearInterval(timer)}
-function placeFood(){do{food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)}}while(snake.some(p=>p.x===food.x&&p.y===food.y))}
-function startGame(){clearInterval(timer);snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];dir={x:1,y:0};next={...dir};score=0;paused=false;over=false;document.getElementById('score').textContent=0;document.getElementById('status').textContent='Use arrow keys or WASD to move.';placeFood();draw();timer=setInterval(tick,125)}
-function draw(){ctx.fillStyle='#050910';ctx.fillRect(0,0,360,360);ctx.fillStyle='#ff4fa3';ctx.fillRect(food.x*cell+2,food.y*cell+2,cell-4,cell-4);snake.forEach((p,i)=>{ctx.fillStyle=i?'#24b8ad':'#72fff0';ctx.fillRect(p.x*cell+1,p.y*cell+1,cell-2,cell-2)})}
-function tick(){if(paused||over)return;dir=next;let h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(h.x<0||h.y<0||h.x>=20||h.y>=20||snake.some(p=>p.x===h.x&&p.y===h.y)){over=true;document.getElementById('status').textContent='Game over! Press Restart to play again.';return}snake.unshift(h);if(h.x===food.x&&h.y===food.y){score+=10;document.getElementById('score').textContent=score;if(score>best){best=score;localStorage.setItem('gz-best',best);document.getElementById('best').textContent=best}placeFood()}else snake.pop();draw()}
-function turn(x,y){if(x===-dir.x&&y===-dir.y)return;next={x,y}}
-function togglePause(){paused=!paused;document.getElementById('status').textContent=paused?'Paused':'Game resumed'}
-document.addEventListener('keydown',e=>{let k=e.key.toLowerCase(),m={arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]};if(m[k]&&modal.classList.contains('show')){e.preventDefault();turn(...m[k])}});
+function updateGames(){document.querySelectorAll('.game').forEach(c=>{let ok=c.dataset.name.includes(search.value.toLowerCase())&&(filter.value==='all'||c.dataset.category===filter.value);c.style.display=ok?'':'none'})}
+search.addEventListener('input',updateGames);filter.addEventListener('change',updateGames);
+function comingSoon(){alert('Coming soon to GameZone! Stay tuned for the next update.')}
+function openModal(id){document.getElementById(id).classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+
+// Snake
+const canvas=document.getElementById('board'),ctx=canvas.getContext('2d'),cell=18;
+let snake,sFood,sDir,sNext,sScore,snakeTimer,sPaused=false,sOver=false;
+let sBest=Number(localStorage.getItem('gz-snake-best')||0);document.getElementById('snakeBest').textContent=sBest;
+function placeSnakeFood(){do{sFood={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)}}while(snake.some(p=>p.x===sFood.x&&p.y===sFood.y))}
+function startSnake(){clearInterval(snakeTimer);snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];sDir={x:1,y:0};sNext={...sDir};sScore=0;sPaused=false;sOver=false;document.getElementById('snakeScore').textContent=0;document.getElementById('snakeStatus').textContent='Use arrow keys or WASD.';placeSnakeFood();drawSnake();snakeTimer=setInterval(tickSnake,125)}
+function drawSnake(){ctx.fillStyle='#050910';ctx.fillRect(0,0,360,360);ctx.fillStyle='#ff4fa3';ctx.fillRect(sFood.x*cell+2,sFood.y*cell+2,cell-4,cell-4);snake.forEach((p,i)=>{ctx.fillStyle=i?'#24b8ad':'#72fff0';ctx.fillRect(p.x*cell+1,p.y*cell+1,cell-2,cell-2)})}
+function tickSnake(){if(sPaused||sOver)return;sDir=sNext;let h={x:snake[0].x+sDir.x,y:snake[0].y+sDir.y};if(h.x<0||h.y<0||h.x>=20||h.y>=20||snake.some(p=>p.x===h.x&&p.y===h.y)){sOver=true;document.getElementById('snakeStatus').textContent='Game over! Press Restart.';return}snake.unshift(h);if(h.x===sFood.x&&h.y===sFood.y){sScore+=10;document.getElementById('snakeScore').textContent=sScore;if(sScore>sBest){sBest=sScore;localStorage.setItem('gz-snake-best',sBest);document.getElementById('snakeBest').textContent=sBest}placeSnakeFood()}else snake.pop();drawSnake()}
+function snakeTurn(x,y){if(!snake|| (x===-sDir.x&&y===-sDir.y))return;sNext={x,y}}
+function pauseSnake(){sPaused=!sPaused;document.getElementById('snakeStatus').textContent=sPaused?'Paused':'Game resumed.'}
+
+// 2048
+let grid2048,score2048=0,previous2048=null,won2048=false;
+let pBest=Number(localStorage.getItem('gz-2048-best')||0);document.getElementById('pBest').textContent=pBest;
+function emptyCells(b){let a=[];b.forEach((row,y)=>row.forEach((v,x)=>{if(!v)a.push({x,y})}));return a}
+function addTile(){let e=emptyCells(grid2048);if(!e.length)return;let p=e[Math.floor(Math.random()*e.length)];grid2048[p.y][p.x]=Math.random()<.9?2:4}
+function new2048(){grid2048=Array.from({length:4},()=>[0,0,0,0]);score2048=0;previous2048=null;won2048=false;addTile();addTile();render2048()}
+function render2048(){let el=document.getElementById('board2048');el.innerHTML='';grid2048.flat().forEach(v=>{let d=document.createElement('div');d.className='tile v'+(v<=2048?v:'2048');d.textContent=v||'';el.appendChild(d)});document.getElementById('pScore').textContent=score2048;document.getElementById('pBest').textContent=pBest}
+function move2048(direction){if(!grid2048)return;let old=grid2048.map(r=>r.slice()),oldScore=score2048;let changed=false;
+for(let i=0;i<4;i++){let vals=[];for(let j=0;j<4;j++){let x=direction==='left'?j:direction==='right'?3-j:i;let y=direction==='up'?j:direction==='down'?3-j:i;vals.push(grid2048[y][x])}
+let compact=vals.filter(Boolean),merged=[];for(let k=0;k<compact.length;k++){if(compact[k]===compact[k+1]){merged.push(compact[k]*2);score2048+=compact[k]*2;k++}else merged.push(compact[k])}while(merged.length<4)merged.push(0);
+for(let j=0;j<4;j++){let x=direction==='left'?j:direction==='right'?3-j:i;let y=direction==='up'?j:direction==='down'?3-j:i;if(grid2048[y][x]!==merged[j])changed=true;grid2048[y][x]=merged[j]}}
+if(changed){previous2048={grid:old,score:oldScore};addTile();if(score2048>pBest){pBest=score2048;localStorage.setItem('gz-2048-best',pBest)}render2048();if(grid2048.flat().includes(2048)&&!won2048){won2048=true;document.getElementById('pStatus').textContent='You reached 2048! Keep playing or start a new game.'}else if(!canMove2048())document.getElementById('pStatus').textContent='No more moves. Start a new game!';else document.getElementById('pStatus').textContent='Great move!'}}
+function canMove2048(){if(emptyCells(grid2048).length)return true;for(let y=0;y<4;y++)for(let x=0;x<4;x++){if(x<3&&grid2048[y][x]===grid2048[y][x+1])return true;if(y<3&&grid2048[y][x]===grid2048[y+1][x])return true}return false}
+function undo2048(){if(!previous2048)return;grid2048=previous2048.grid;score2048=previous2048.score;previous2048=null;render2048();document.getElementById('pStatus').textContent='Last move undone.'}
+document.addEventListener('keydown',e=>{let k=e.key.toLowerCase(),dirs={arrowleft:'left',a:'left',arrowright:'right',d:'right',arrowup:'up',w:'up',arrowdown:'down',s:'down'};if(document.getElementById('puzzleModal').classList.contains('show')&&dirs[k]){e.preventDefault();move2048(dirs[k])}if(document.getElementById('snakeModal').classList.contains('show')){let m={arrowup:[0,-1],w:[0,-1],arrowdown:[0,1],s:[0,1],arrowleft:[-1,0],a:[-1,0],arrowright:[1,0],d:[1,0]};if(m[k]){e.preventDefault();snakeTurn(...m[k])}}});
+let touchStart=null;document.getElementById('board2048').addEventListener('touchstart',e=>{let t=e.changedTouches[0];touchStart={x:t.clientX,y:t.clientY}},{passive:true});
+document.getElementById('board2048').addEventListener('touchend',e=>{if(!touchStart)return;let t=e.changedTouches[0],dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;if(Math.max(Math.abs(dx),Math.abs(dy))>25)move2048(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));touchStart=null},{passive:true});
+new2048();
 </script></body></html>
