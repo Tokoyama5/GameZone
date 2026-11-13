@@ -25,7 +25,7 @@ canvas{display:block;width:min(100%,360px);height:auto;margin:0 auto;background:
 .mobile button[data-dir="down"]{grid-column:2;grid-row:2}
 .mobile button[data-dir="right"]{grid-column:3;grid-row:2}
 .board2048{touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none}
-.board2048{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:360px;margin:12px auto;padding:8px;background:#273449;border-radius:12px;touch-action:pan-y}.tile{aspect-ratio:1;display:grid;place-items:center;border-radius:8px;background:#34445d;color:white;font-size:clamp(1.1rem,5vw,1.8rem);font-weight:900}.tile.v0{background:#172033}.tile.v2{background:#dce5f2;color:#253047}.tile.v4{background:#b9d8e8;color:#253047}.tile.v8{background:#55cfc4;color:#09252a}.tile.v16{background:#37aeb5}.tile.v32{background:#397fba}.tile.v64{background:#5366c5}.tile.v128,.tile.v256,.tile.v512,.tile.v1024,.tile.v2048{background:#b64e9a}
+.board2048{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:360px;margin:12px auto;padding:8px;background:#273449;border-radius:12px;touch-action:none}.tile{aspect-ratio:1;display:grid;place-items:center;border-radius:8px;background:#34445d;color:white;font-size:clamp(1.1rem,5vw,1.8rem);font-weight:900}.tile.v0{background:#172033}.tile.v2{background:#dce5f2;color:#253047}.tile.v4{background:#b9d8e8;color:#253047}.tile.v8{background:#55cfc4;color:#09252a}.tile.v16{background:#37aeb5}.tile.v32{background:#397fba}.tile.v64{background:#5366c5}.tile.v128,.tile.v256,.tile.v512,.tile.v1024,.tile.v2048{background:#b64e9a}
 .game-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
 @media(max-width:600px){header{align-items:flex-start;flex-direction:column}nav a{margin:0 14px 0 0}main{padding-top:22px}.hero{padding:26px 20px}}
 </style>
@@ -59,14 +59,18 @@ function closeModal(id){document.getElementById(id).classList.remove('show')}
 // Snake
 const canvas=document.getElementById('board'),ctx=canvas.getContext('2d'),cell=18;
 let snake,sFood,sDir,sNext,sScore,snakeTimer,sPaused=false,sOver=false;
+const SNAKE_START_SPEED=190,SNAKE_MIN_SPEED=65,SNAKE_SPEEDUP=12;
+let snakeSpeed=SNAKE_START_SPEED;
 let sBest=Number(localStorage.getItem('gz-snake-best')||0);document.getElementById('snakeBest').textContent=sBest;
 function placeSnakeFood(){do{sFood={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)}}while(snake.some(p=>p.x===sFood.x&&p.y===sFood.y))}
-function startSnake(){clearInterval(snakeTimer);snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];sDir={x:1,y:0};sNext={...sDir};sScore=0;sPaused=false;sOver=false;document.getElementById('snakeScore').textContent=0;document.getElementById('snakeStatus').textContent='Use arrow keys or WASD.';placeSnakeFood();drawSnake();snakeTimer=setInterval(tickSnake,125)}
+function setSnakeSpeed(){clearInterval(snakeTimer);snakeTimer=setInterval(tickSnake,snakeSpeed)}
+function startSnake(){clearInterval(snakeTimer);snake=[{x:10,y:10},{x:9,y:10},{x:8,y:10}];sDir={x:1,y:0};sNext={...sDir};turnQueued=false;sScore=0;snakeSpeed=SNAKE_START_SPEED;sPaused=false;sOver=false;document.getElementById('snakeScore').textContent=0;document.getElementById('snakeStatus').textContent='Easy start. Eat food to increase your speed!';placeSnakeFood();drawSnake();setSnakeSpeed()}
 function drawSnake(){ctx.fillStyle='#050910';ctx.fillRect(0,0,360,360);ctx.fillStyle='#ff4fa3';ctx.fillRect(sFood.x*cell+2,sFood.y*cell+2,cell-4,cell-4);snake.forEach((p,i)=>{ctx.fillStyle=i?'#24b8ad':'#72fff0';ctx.fillRect(p.x*cell+1,p.y*cell+1,cell-2,cell-2)})}
-function tickSnake(){if(sPaused||sOver)return;sDir=sNext;let h={x:snake[0].x+sDir.x,y:snake[0].y+sDir.y};if(h.x<0||h.y<0||h.x>=20||h.y>=20||snake.some(p=>p.x===h.x&&p.y===h.y)){sOver=true;document.getElementById('snakeStatus').textContent='Game over! Press Restart.';return}snake.unshift(h);if(h.x===sFood.x&&h.y===sFood.y){sScore+=10;document.getElementById('snakeScore').textContent=sScore;if(sScore>sBest){sBest=sScore;localStorage.setItem('gz-snake-best',sBest);document.getElementById('snakeBest').textContent=sBest}placeSnakeFood()}else snake.pop();drawSnake()}
+function tickSnake(){if(sPaused||sOver)return;sDir=sNext;turnQueued=false;let h={x:snake[0].x+sDir.x,y:snake[0].y+sDir.y};if(h.x<0||h.y<0||h.x>=20||h.y>=20||snake.some(p=>p.x===h.x&&p.y===h.y)){sOver=true;clearInterval(snakeTimer);document.getElementById('snakeStatus').textContent='Game over! Press Restart.';return}snake.unshift(h);if(h.x===sFood.x&&h.y===sFood.y){sScore+=10;document.getElementById('snakeScore').textContent=sScore;if(sScore>sBest){sBest=sScore;localStorage.setItem('gz-snake-best',sBest);document.getElementById('snakeBest').textContent=sBest}snakeSpeed=Math.max(SNAKE_MIN_SPEED,SNAKE_START_SPEED-Math.floor(sScore/10)*SNAKE_SPEEDUP);setSnakeSpeed();placeSnakeFood();document.getElementById('snakeStatus').textContent='Speed: '+(SNAKE_START_SPEED-snakeSpeed)/SNAKE_SPEEDUP+' level(s) faster!'}else snake.pop();drawSnake()}
+let turnQueued=false;
 function snakeTurn(x,y){
-  if(!snake || sOver || (x===-sDir.x && y===-sDir.y)) return;
-  sNext={x,y};
+  if(!snake || sOver || turnQueued || (x===-sDir.x && y===-sDir.y)) return;
+  sNext={x,y};turnQueued=true;
 }
 const snakeDirections={up:[0,-1],left:[-1,0],down:[0,1],right:[1,0]};
 document.getElementById('snakePad').addEventListener('pointerdown',e=>{
@@ -97,11 +101,13 @@ let swipeStart=null;
 const puzzleBoard=document.getElementById('board2048');
 puzzleBoard.addEventListener('pointerdown',e=>{
   if(e.pointerType==='mouse'&&e.button!==0)return;
+  e.preventDefault();
   swipeStart={x:e.clientX,y:e.clientY};
   try{puzzleBoard.setPointerCapture(e.pointerId)}catch(_){}
 });
 puzzleBoard.addEventListener('pointerup',e=>{
   if(!swipeStart)return;
+  e.preventDefault();
   const dx=e.clientX-swipeStart.x,dy=e.clientY-swipeStart.y;
   if(Math.max(Math.abs(dx),Math.abs(dy))>=18){
     move2048(Math.abs(dx)>Math.abs(dy)?(dx>0?'right':'left'):(dy>0?'down':'up'));
