@@ -1,459 +1,1274 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameZone | منطقة الألعاب</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>GameZone - Play, Explore, Repeat</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#131c31',
+                        neonCyan: '#00f2fe',
+                        neonPink: '#fe0099',
+                        neonPurple: '#9d00ff'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-color: #0d0614;
-            --card-bg: #160b24;
-            --neon-cyan: #00ffcc;
-            --neon-pink: #ff00ff;
-            --neon-purple: #9d00ff;
-            --text-color: #ffffff;
-            --text-dim: #b8b8b8;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap');
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
         }
-
-        header {
-            width: 100%;
-            background: rgba(13, 6, 20, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            border-bottom: 2px solid var(--neon-purple);
-            box-shadow: 0 0 15px rgba(157, 0, 255, 0.4);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
+        .arcade-font {
+            font-family: 'Press Start 2P', monospace;
         }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .neon-glow-cyan {
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
         }
-
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 600;
-            transition: 0.3s;
+        .neon-glow-cyan:hover {
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.8);
         }
-
-        nav a:hover {
-            color: var(--neon-pink);
-            text-shadow: 0 0 8px var(--neon-pink);
+        .neon-glow-pink {
+            box-shadow: 0 0 15px rgba(254, 0, 153, 0.4);
         }
-
-        .main-container {
-            margin-top: 100px;
-            width: 100%;
-            max-width: 1200px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
+        .neon-glow-pink:hover {
+            box-shadow: 0 0 25px rgba(254, 0, 153, 0.8);
         }
-
-        .hero {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(22, 11, 36, 0.8), rgba(157, 0, 255, 0.2));
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.3);
-            border-radius: 20px;
-            width: 100%;
+        .text-glow-cyan {
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.7);
         }
-
-        .hero h1 {
-            font-size: 36px;
-            color: var(--neon-pink);
-            text-shadow: 0 0 15px var(--neon-pink);
-            margin-bottom: 15px;
+        .text-glow-pink {
+            text-shadow: 0 0 10px rgba(254, 0, 153, 0.7);
         }
-
-        .hero p {
-            color: var(--text-dim);
-            font-size: 16px;
-            margin-bottom: 20px;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        /* نظام التحكم بالسرعة والصعوبة */
-        .difficulty-panel {
-            background: rgba(22, 11, 36, 0.9);
-            border: 1px solid var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.2);
-            padding: 15px 25px;
-            border-radius: 12px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            width: 100%;
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
         }
-
-        .difficulty-panel span {
-            color: var(--neon-cyan);
-            font-weight: bold;
+        ::-webkit-scrollbar-thumb {
+            background: #1f293d;
+            border-radius: 4px;
         }
-
-        .diff-btn {
-            background: transparent;
-            border: 2px solid var(--text-dim);
-            color: var(--text-dim);
-            padding: 6px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .diff-btn.active, .diff-btn:hover {
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan);
-            background: rgba(0, 255, 204, 0.1);
-        }
-
-        /* بطاقة المطور */
-        .developer-section {
-            scroll-margin-top: 120px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .dev-title {
-            font-size: 28px;
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-            margin-bottom: 5px;
-            text-align: center;
-        }
-
-        .dev-subtitle {
-            color: var(--text-dim);
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
-        .dev-card {
-            background: var(--card-bg);
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.25);
-            border-radius: 20px;
-            padding: 30px;
-            width: 100%;
-            max-width: 450px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .dev-badge {
-            background: rgba(157, 0, 255, 0.2);
-            border: 1px solid var(--neon-purple);
-            color: var(--neon-cyan);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin-bottom: 20px;
-        }
-
-        .avatar-container {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
-            box-shadow: 0 0 20px var(--neon-cyan);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            background: #000;
-        }
-
-        .dev-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            margin-bottom: 10px;
-            text-shadow: 0 0 8px #fff;
-        }
-
-        .dev-bio {
-            color: var(--text-dim);
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 14px;
-            margin-bottom: 25px;
-            width: 100%;
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 12px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-
-        .instagram {
-            background: rgba(255, 0, 128, 0.1);
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
-        }
-
-        .instagram:hover {
-            background: var(--neon-pink);
-            color: #fff;
-            box-shadow: 0 0 15px var(--neon-pink);
-        }
-
-        .twitter {
-            background: rgba(0, 255, 204, 0.1);
-            border-color: var(--neon-cyan);
-            color: var(--neon-cyan);
-        }
-
-        .twitter:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 15px var(--neon-cyan);
-        }
-
-        /* قسم الألعاب */
-        .games-section {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
-
-        .game-card {
-            background: var(--card-bg);
-            border: 1px solid var(--neon-purple);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
-            transition: 0.3s;
-        }
-
-        .game-card:hover {
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.3);
-            transform: translateY(-5px);
-        }
-
-        .game-card h3 {
-            color: var(--neon-cyan);
-            margin-bottom: 10px;
-        }
-
-        .game-card p {
-            color: var(--text-dim);
-            font-size: 13px;
-            margin-bottom: 15px;
-        }
-
-        .play-btn {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
-            color: #fff;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.4);
-            transition: 0.3s;
-        }
-
-        .play-btn:hover {
-            box-shadow: 0 0 20px var(--neon-cyan);
-            color: var(--neon-cyan);
-        }
-
-        footer {
-            margin-top: 50px;
-            padding: 20px;
-            color: var(--text-dim);
-            font-size: 13px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            width: 100%;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f2fe;
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between selection:bg-neonCyan selection:text-black">
 
-    <header>
-        <div class="logo">
-            ⚡ GAMEZONE
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/80 border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neonCyan to-neonPink flex items-center justify-center neon-glow-cyan">
+                    <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+                <span class="text-2xl font-extrabold tracking-wider bg-gradient-to-r from-neonCyan via-purple-400 to-neonPink bg-clip-text text-transparent text-glow-cyan">GAMEZONE</span>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <button onclick="switchView('home')" class="hover:text-neonCyan transition">Games</button>
+                <button onclick="scrollToSection('about')" class="hover:text-neonCyan transition">About</button>
+                <button onclick="scrollToSection('developer')" class="hover:text-neonCyan transition">Developer</button>
+            </nav>
+            <div class="flex items-center space-x-3">
+                <button onclick="switchView('home')" class="px-4 py-2 rounded-xl bg-gradient-to-r from-neonCyan to-neonPink text-black font-bold text-sm neon-glow-cyan transition transform active:scale-95">Explore Arcade</button>
+            </div>
         </div>
-        <nav>
-            <a href="#games">الألعاب</a>
-            <a href="#developer">المطور</a>
-        </nav>
     </header>
 
-    <div class="main-container">
+    <!-- Main Content Area -->
+    <main class="flex-grow">
         
-        <!-- لافتة الترحيب -->
-        <section class="hero">
-            <h1>مرحباً بك في عالم التحدي</h1>
-            <p>الموقع قيد التطوير المستمر مع ميزات وألعاب حماسية قادمة قريباً!</p>
-        </section>
+        <!-- HOME VIEW: Game Catalog & Hero -->
+        <div id="home-view" class="block">
+            <!-- Hero Section -->
+            <section class="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden text-center bg-gradient-to-b from-darkBg via-[#0f172a] to-darkBg">
+                <div class="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(#00f2fe_1px,transparent_1px)] [background-size:24px_24px]"></div>
+                <div class="max-w-4xl mx-auto relative z-10">
+                    <span class="px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase bg-purple-950/80 text-neonPink border border-neonPink/40 inline-block mb-6 neon-glow-pink">Next-Gen Web Gaming</span>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 text-white uppercase">
+                        Play. <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan to-neonPink text-glow-cyan">Explore.</span> Repeat.
+                    </h1>
+                    <p class="text-base sm:text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
+                        Experience instantaneous, high-performance arcade classics and modern web games crafted for lightning-fast action on any device.
+                    </p>
+                    
+                    <!-- Search & Filter bar -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-2xl mx-auto mb-8">
+                        <div class="relative w-full">
+                            <svg class="w-5 h-5 absolute left-4 top-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            <input type="text" id="game-search" oninput="filterGames()" placeholder="Search games..." class="w-full pl-12 pr-4 py-3 bg-cardBg/90 border border-gray-700 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:border-neonCyan transition shadow-inner">
+                        </div>
+                        <div class="flex items-center gap-2 w-full sm:w-auto">
+                            <button onclick="setCategory('all')" id="cat-all" class="category-btn px-4 py-3 rounded-xl bg-neonCyan text-black font-bold text-sm transition flex-1 sm:flex-none">All</button>
+                            <button onclick="setCategory('arcade')" id="cat-arcade" class="category-btn px-4 py-3 rounded-xl bg-cardBg border border-gray-700 text-gray-300 font-bold text-sm hover:border-neonCyan transition flex-1 sm:flex-none">Arcade</button>
+                            <button onclick="setCategory('puzzle')" id="cat-puzzle" class="category-btn px-4 py-3 rounded-xl bg-cardBg border border-gray-700 text-gray-300 font-bold text-sm hover:border-neonCyan transition flex-1 sm:flex-none">Puzzle</button>
+                        </div>
+                    </div>
 
-        <!-- لوحة التحكم في السرعة والصعوبة -->
-        <div class="difficulty-panel">
-            <span>⚙️ مستوى الصعوبة والسرعة:</span>
-            <button class="diff-btn" onclick="setDifficulty('easy')">سهل (بطيء)</button>
-            <button class="diff-btn active" onclick="setDifficulty('normal')">عادي</button>
-            <button class="diff-btn" onclick="setDifficulty('hard')">صعب (سريع 🔥)</button>
+                    <!-- Under Development Notice -->
+                    <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs sm:text-sm">
+                        <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span>GameZone is under development. More games coming soon!</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Games Grid Section -->
+            <section class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-bold tracking-tight text-white flex items-center space-x-2">
+                        <span class="w-3 h-3 rounded-full bg-neonCyan animate-pulse"></span>
+                        <span>Available Games</span>
+                    </h2>
+                    <span id="game-count" class="text-xs text-gray-400 uppercase tracking-widest font-semibold">4 Games Ready</span>
+                </div>
+
+                <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Game Card 1: Snake -->
+                    <div data-category="arcade" data-name="snake classic retro" class="game-card bg-cardBg rounded-2xl border border-gray-800 overflow-hidden hover:border-neonCyan transition-all duration-300 group flex flex-col justify-between">
+                        <div class="p-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-black mb-4 shadow-lg group-hover:scale-105 transition">
+                                <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-green-400 bg-green-950/60 px-2.5 py-1 rounded-md border border-green-800/50">Arcade</span>
+                            <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-neonCyan transition">Snake Classic</h3>
+                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Guide the snake, eat food to grow longer, and avoid hitting walls or your own tail!</p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="launchGame('snake')" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonCyan to-teal-400 text-black font-bold text-sm neon-glow-cyan transition active:scale-95 flex items-center justify-center space-x-2">
+                                <span>Play Now</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 2: Hit the Mole -->
+                    <div data-category="arcade" data-name="hit the mole whack reflex" class="game-card bg-cardBg rounded-2xl border border-gray-800 overflow-hidden hover:border-neonPink transition-all duration-300 group flex flex-col justify-between">
+                        <div class="p-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-neonPink to-purple-600 flex items-center justify-center text-black mb-4 shadow-lg group-hover:scale-105 transition">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-neonPink bg-pink-950/60 px-2.5 py-1 rounded-md border border-pink-800/50">Arcade</span>
+                            <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-neonPink transition">Hit the Mole</h3>
+                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Test your reflexes! Tap moles as fast as you can before the 30-second timer expires.</p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="launchGame('mole')" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink transition active:scale-95 flex items-center justify-center space-x-2">
+                                <span>Play Now</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 3: Cube Tower -->
+                    <div data-category="arcade" data-name="cube tower stacking block physics" class="game-card bg-cardBg rounded-2xl border border-gray-800 overflow-hidden hover:border-neonCyan transition-all duration-300 group flex flex-col justify-between">
+                        <div class="p-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-black mb-4 shadow-lg group-hover:scale-105 transition">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded-md border border-blue-800/50">Arcade</span>
+                            <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-neonCyan transition">Cube Tower</h3>
+                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Stack moving blocks precisely to build the tallest skyscraper tower possible!</p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="launchGame('tower')" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 text-black font-bold text-sm neon-glow-cyan transition active:scale-95 flex items-center justify-center space-x-2">
+                                <span>Play Now</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Game Card 4: Hextris -->
+                    <div data-category="puzzle" data-name="hextris hexagonal puzzle match block" class="game-card bg-cardBg rounded-2xl border border-gray-800 overflow-hidden hover:border-neonPink transition-all duration-300 group flex flex-col justify-between">
+                        <div class="p-6">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-black mb-4 shadow-lg group-hover:scale-105 transition">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l9 5v10l-9 5-9-5V7l9-5z"></path></svg>
+                            </div>
+                            <span class="text-xs font-bold uppercase tracking-wider text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800/50">Puzzle</span>
+                            <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-neonPink transition">Hextris</h3>
+                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Rotate the central hexagon to match incoming colored blocks and clear them before overflow!</p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <button onclick="launchGame('hextris')" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink transition active:scale-95 flex items-center justify-center space-x-2">
+                                <span>Play Now</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-t border-gray-800/80">
+                <div class="bg-cardBg/60 backdrop-blur rounded-3xl p-8 sm:p-12 border border-gray-800">
+                    <h2 class="text-3xl font-extrabold text-white mb-4 text-glow-cyan">About GameZone</h2>
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
+                        GameZone is a high-performance web gaming platform designed for gamers who love instant entertainment without bulky downloads or intrusive advertisements. Built with pure HTML5, CSS3, and vanilla JavaScript, GameZone features optimized game engines that load in milliseconds and adapt seamlessly to mobile, tablet, and desktop screens.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-gray-800">
+                        <div>
+                            <h4 class="text-neonCyan font-bold text-lg mb-1">Lightning Fast</h4>
+                            <p class="text-sm text-gray-400">Zero dependencies and optimized lightweight rendering loops.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-neonPink font-bold text-lg mb-1">Cross-Platform</h4>
+                            <p class="text-sm text-gray-400">Responsive touch layouts & keyboard controls for every device.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-purple-400 font-bold text-lg mb-1">Pure Vanilla</h4>
+                            <p class="text-sm text-gray-400">Crafted strictly using native browser APIs and custom math engines.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Developer Section -->
+            <section id="developer" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+                <div class="bg-gradient-to-r from-cardBg via-[#161f36] to-cardBg rounded-3xl p-8 sm:p-10 border border-neonCyan/30 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-8">
+                    <div class="flex items-center space-x-6">
+                        <div class="relative">
+                            <div class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-neonCyan neon-glow-cyan bg-gray-800 flex items-center justify-center">
+                                <img src="avatar.jpg" alt="Tokuyama" onerror="this.onerror=null;this.src='https://placehold.co/200x200/131c31/00f2fe?text=Tokuyama';" class="w-full h-full object-cover">
+                            </div>
+                            <span class="absolute -bottom-2 -right-2 px-2 py-0.5 bg-neonCyan text-black font-extrabold text-[10px] rounded-md uppercase">Creator</span>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-neonCyan font-bold">Lead Developer & Creator</span>
+                            <h3 class="text-2xl font-extrabold text-white mt-1">Tokuyama</h3>
+                            <p class="text-sm text-gray-400 mt-1 max-w-md">Passionate software engineer and game developer dedicated to building high-speed, immersive web experiences.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- Instagram Link -->
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-2xl bg-cardBg border border-gray-700 hover:border-neonPink hover:text-neonPink flex items-center justify-center text-gray-300 transition neon-glow-pink">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <!-- Twitter Link -->
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-2xl bg-cardBg border border-gray-700 hover:border-neonCyan hover:text-neonCyan flex items-center justify-center text-gray-300 transition neon-glow-cyan">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <!-- قسم الألعاب -->
-        <section id="games" class="games-section">
-            <h2 style="color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink);">الألعاب المتاحة</h2>
-            <div class="games-grid">
-                <div class="game-card">
-                    <h3>Snake</h3>
-                    <p>لعبة الثعبان الكلاسيكية المطورة بتصميم نيون سريع ومتجاوب.</p>
-                    <button class="play-btn" onclick="alert('جاري تشغيل لعبة Snake مع مستوى السرعة المحدد!')">العب الآن</button>
-                </div>
-                <div class="game-card">
-                    <h3>Hit the Mole</h3>
-                    <p>اختبر سرعة بديهتك وردة فعلك في اصطياد الخلد.</p>
-                    <button class="play-btn" onclick="alert('جاري تشغيل لعبة Hit the Mole!')">العب الآن</button>
-                </div>
-                <div class="game-card">
-                    <h3>Cube Tower</h3>
-                    <p>ابنِ برج المكعبات إلى أقصى ارتفاع ممكن بحذر.</p>
-                    <button class="play-btn" onclick="alert('جاري تشغيل لعبة Cube Tower!')">العب الآن</button>
-                </div>
-                <div class="game-card">
-                    <h3>Hextris</h3>
-                    <p>لعبة الألغاز السداسية السريعة والممتعة.</p>
-                    <button class="play-btn" onclick="alert('جاري تشغيل لعبة Hextris!')">العب الآن</button>
+        <!-- GAME VIEW CONTAINER -->
+        <div id="game-view" class="hidden max-w-4xl mx-auto px-4 py-8">
+            <!-- Game Header Controls -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 bg-cardBg p-4 rounded-2xl border border-gray-800">
+                <button onclick="returnToHome()" class="px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-semibold text-sm transition flex items-center space-x-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span>Back to Games</span>
+                </button>
+                <div id="game-title-header" class="text-xl font-extrabold text-white text-glow-cyan">Game</div>
+                
+                <!-- Difficulty Selector -->
+                <div class="flex items-center space-x-2">
+                    <span class="text-xs text-gray-400 font-semibold uppercase">Speed:</span>
+                    <select id="difficulty-select" onchange="changeDifficulty(this.value)" class="bg-darkBg border border-gray-700 text-neonCyan font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-neonCyan">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
                 </div>
             </div>
-        </section>
 
-        <!-- بطاقة المطور -->
-        <section id="developer" class="developer-section">
-            <h2 class="dev-title">DEVELOPER PROFILE</h2>
-            <div class="dev-subtitle">بطاقة المطور</div>
-            
-            <div class="dev-card">
-                <div class="dev-badge">مطور الموقع</div>
+            <!-- Active Game Arena Frame -->
+            <div id="game-container" class="relative bg-cardBg rounded-3xl border border-gray-800 p-4 sm:p-6 flex flex-col items-center justify-center overflow-hidden shadow-2xl min-h-[500px]">
                 
-                <div class="avatar-container">
-                    <!-- الصورة الشخصية المرفوعة في المستودع -->
-                    <img src="./avatar.jpg" alt="Tokoyama">
+                <!-- Dynamic Game Content injected here -->
+                <div id="active-game-viewport" class="w-full flex flex-col items-center justify-center">
+                    <!-- Specific game renders inside here -->
                 </div>
 
-                <div class="dev-name">Tokoyama</div>
-                
-                <div class="dev-bio">
-                    مصمم مواقع وانسان بدون حياة
-                </div>
-
-                <div class="social-links">
-                    <a href="https://www.instagram.com/i.toko_67?psln=Nm8wNHBzN2cxcG5r" target="_blank" class="social-btn instagram">
-                        📸 Instagram
-                    </a>
-                    <a href="https://x.com/ui_fathi" target="_blank" class="social-btn twitter">
-                        𝕏 X (Twitter)
-                    </a>
-                </div>
             </div>
-        </section>
+        </div>
 
-    </div>
+    </main>
 
-    <footer>
-        <p>جميع الحقوق محفوظة © GameZone 2026 | تطوير Tokoyama</p>
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 bg-darkBg/90 py-8 text-center text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 GameZone. Created by <span class="text-neonCyan font-bold">Tokuyama</span>. All rights reserved.</p>
+            <div class="flex space-x-6 text-gray-400">
+                <a href="https://instagram.com" target="_blank" class="hover:text-neonPink transition">Instagram</a>
+                <a href="https://twitter.com" target="_blank" class="hover:text-neonCyan transition">Twitter</a>
+                <a href="#" onclick="switchView('home'); return false;" class="hover:text-white transition">Privacy & Terms</a>
+            </div>
+        </div>
     </footer>
 
+    <!-- JAVASCRIPT GAME ENGINES & CONTROLLERS -->
     <script>
-        // متغيرات التحكم في السرعة والصعوبة للألعاب
-        let gameSpeedMultiplier = 1;
+        // Global State & Management
+        let currentGame = null;
+        let gameLoopTimer = null;
+        let currentDifficulty = 'medium'; // easy, medium, hard
 
-        function setDifficulty(level) {
-            // إزالة التفعيل عن الأزرار وتحديد الزر النشط
-            document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            if (level === 'easy') {
-                gameSpeedMultiplier = 0.7; // أبطأ وأسهل
-            } else if (level === 'normal') {
-                gameSpeedMultiplier = 1;   // السرعة العادية
-            } else if (level === 'hard') {
-                gameSpeedMultiplier = 1.6; // سريع وصعب جداً للتحدي
+        function switchView(view) {
+            stopCurrentGame();
+            const homeView = document.getElementById('home-view');
+            const gameView = document.getElementById('game-view');
+            if (view === 'home') {
+                homeView.classList.remove('hidden');
+                gameView.classList.add('hidden');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            } else {
+                homeView.classList.add('hidden');
+                gameView.classList.remove('hidden');
             }
-            
-            // حفظ المستوى محلياً
-            localStorage.setItem('gameDifficulty', level);
+        }
+
+        function returnToHome() {
+            switchView('home');
+        }
+
+        function scrollToSection(id) {
+            switchView('home');
+            setTimeout(() => {
+                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            }, 50);
+        }
+
+        function stopCurrentGame() {
+            if (currentGame && typeof currentGame.cleanup === 'function') {
+                currentGame.cleanup();
+            }
+            currentGame = null;
+            if (gameLoopTimer) {
+                clearInterval(gameLoopTimer);
+                gameLoopTimer = null;
+            }
+        }
+
+        function changeDifficulty(val) {
+            currentDifficulty = val;
+            if (currentGame && typeof currentGame.setDifficulty === 'function') {
+                currentGame.setDifficulty(val);
+            }
+        }
+
+        function filterGames() {
+            const query = document.getElementById('game-search').value.toLowerCase();
+            const cards = document.querySelectorAll('.game-card');
+            let count = 0;
+            cards.forEach(card => {
+                const name = card.getAttribute('data-name');
+                if (name.includes(query)) {
+                    card.style.display = 'flex';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('game-count').innerText = `${count} Games Available`;
+        }
+
+        function setCategory(cat) {
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-neonCyan', 'text-black');
+                btn.classList.add('bg-cardBg', 'border', 'border-gray-700', 'text-gray-300');
+            });
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-cardBg', 'border', 'border-gray-700', 'text-gray-300');
+                activeBtn.classList.add('bg-neonCyan', 'text-black');
+            }
+            const cards = document.querySelectorAll('.game-card');
+            let count = 0;
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                if (cat === 'all' || cardCat === cat) {
+                    card.style.display = 'flex';
+                    count++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.getElementById('game-count').innerText = `${count} Games Available`;
+        }
+
+        function launchGame(gameKey) {
+            stopCurrentGame();
+            switchView('game');
+            const viewport = document.getElementById('active-game-viewport');
+            viewport.innerHTML = '';
+
+            if (gameKey === 'snake') {
+                document.getElementById('game-title-header').innerText = 'Snake Classic';
+                currentGame = new SnakeGame(viewport);
+            } else if (gameKey === 'mole') {
+                document.getElementById('game-title-header').innerText = 'Hit the Mole';
+                currentGame = new MoleGame(viewport);
+            } else if (gameKey === 'tower') {
+                document.getElementById('game-title-header').innerText = 'Cube Tower';
+                currentGame = new CubeTowerGame(viewport);
+            } else if (gameKey === 'hextris') {
+                document.getElementById('game-title-header').innerText = 'Hextris Arcade';
+                currentGame = new HextrisGame(viewport);
+            }
+        }
+
+
+        /* ==========================================
+           1. SNAKE GAME ENGINE
+           ========================================== */
+        class SnakeGame {
+            constructor(container) {
+                this.container = container;
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.canvas.width = 400;
+                this.canvas.height = 400;
+                this.canvas.className = 'bg-[#0b0f19] border-2 border-gray-800 rounded-2xl max-w-full shadow-lg';
+                
+                this.container.appendChild(this.buildUI());
+                this.container.querySelector('#snake-canvas-wrapper').appendChild(this.canvas);
+
+                this.gridSize = 20;
+                this.tileCount = 20;
+                this.resetState();
+                this.setupListeners();
+                this.updateScoreBoard();
+            }
+
+            buildUI() {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col items-center w-full';
+                div.innerHTML = `
+                    <div class="flex items-center justify-between w-full max-w-[400px] mb-3 px-2 text-sm font-bold">
+                        <div class="text-neonCyan">Score: <span id="snake-score">0</span></div>
+                        <div class="text-neonPink">Best: <span id="snake-best">0</span></div>
+                    </div>
+                    <div id="snake-canvas-wrapper" class="relative flex justify-center"></div>
+                    <!-- Controls overlay for touch & pause -->
+                    <div class="flex items-center justify-center gap-4 mt-4">
+                        <button id="snake-start-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neonCyan to-teal-400 text-black font-bold text-sm neon-glow-cyan">Start Game</button>
+                        <button id="snake-pause-btn" class="px-6 py-2.5 rounded-xl bg-gray-800 text-white font-bold text-sm hover:bg-gray-700 hidden">Pause</button>
+                    </div>
+                    <!-- Mobile Touch D-Pad -->
+                    <div class="grid grid-cols-3 gap-2 mt-4 max-w-[220px] w-full">
+                        <div></div>
+                        <button id="btn-up" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">⬆️</button>
+                        <div></div>
+                        <button id="btn-left" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">⬅️</button>
+                        <button id="btn-down" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">⬇️</button>
+                        <button id="btn-right" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">➡️</button>
+                    </div>
+                `;
+                return div;
+            }
+
+            resetState() {
+                this.snake = [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}];
+                this.dx = 1;
+                this.dy = 0;
+                this.nextDx = 1;
+                this.nextDy = 0;
+                this.food = {x: 5, y: 5};
+                this.score = 0;
+                this.bestScore = localStorage.getItem('gamezone_snake_best') || 0;
+                this.isGameOver = false;
+                this.isPaused = false;
+                this.isPlaying = false;
+                this.baseSpeed = this.getSpeedByDifficulty(currentDifficulty);
+                this.currentSpeed = this.baseSpeed;
+                this.spawnFood();
+            }
+
+            getSpeedByDifficulty(diff) {
+                if (diff === 'easy') return 140;
+                if (diff === 'medium') return 100;
+                return 70; // hard
+            }
+
+            setDifficulty(diff) {
+                this.baseSpeed = this.getSpeedByDifficulty(diff);
+                if (this.isPlaying && !this.isPaused) {
+                    this.restartLoop();
+                }
+            }
+
+            setupListeners() {
+                this.boundKeyHandler = (e) => {
+                    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+                        e.preventDefault();
+                    }
+                    if (!this.isPlaying || this.isPaused) return;
+                    if ((e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') && this.dy === 0) { this.nextDx = 0; this.nextDy = -1; }
+                    if ((e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') && this.dy === 0) { this.nextDx = 0; this.nextDy = 1; }
+                    if ((e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') && this.dx === 0) { this.nextDx = -1; this.nextDy = 0; }
+                    if ((e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') && this.dx === 0) { this.nextDx = 1; this.nextDy = 0; }
+                };
+                window.addEventListener('keydown', this.boundKeyHandler);
+
+                const bindBtn = (id, dx, dy) => {
+                    const el = this.container.querySelector(id);
+                    if (el) {
+                        el.addEventListener('pointerdown', (e) => {
+                            e.preventDefault();
+                            if (!this.isPlaying || this.isPaused) return;
+                            if (dx !== 0 && this.dx === 0) { this.nextDx = dx; this.nextDy = dy; }
+                            if (dy !== 0 && this.dy === 0) { this.nextDx = dx; this.nextDy = dy; }
+                        });
+                    }
+                };
+                bindBtn('#btn-up', 0, -1);
+                bindBtn('#btn-down', 0, 1);
+                bindBtn('#btn-left', -1, 0);
+                bindBtn('#btn-right', 1, 0);
+
+                const startBtn = this.container.querySelector('#snake-start-btn');
+                startBtn.addEventListener('click', () => {
+                    if (!this.isPlaying) {
+                        this.startGame();
+                        startBtn.innerText = 'Restart';
+                        this.container.querySelector('#snake-pause-btn').classList.remove('hidden');
+                    } else {
+                        this.resetState();
+                        this.startGame();
+                    }
+                });
+
+                const pauseBtn = this.container.querySelector('#snake-pause-btn');
+                pauseBtn.addEventListener('click', () => {
+                    if (!this.isPlaying) return;
+                    this.isPaused = !this.isPaused;
+                    pauseBtn.innerText = this.isPaused ? 'Resume' : 'Pause';
+                });
+            }
+
+            startGame() {
+                this.resetState();
+                this.isPlaying = true;
+                this.isPaused = false;
+                this.restartLoop();
+            }
+
+            restartLoop() {
+                if (gameLoopTimer) clearInterval(gameLoopTimer);
+                gameLoopTimer = setInterval(() => this.gameStep(), this.currentSpeed);
+            }
+
+            spawnFood() {
+                let valid = false;
+                while (!valid) {
+                    this.food.x = Math.floor(Math.random() * this.tileCount);
+                    this.food.y = Math.floor(Math.random() * this.tileCount);
+                    valid = !this.snake.some(segment => segment.x === this.food.x && segment.y === this.food.y);
+                }
+            }
+
+            gameStep() {
+                if (!this.isPlaying || this.isPaused || this.isGameOver) return;
+
+                this.dx = this.nextDx;
+                this.dy = this.nextDy;
+
+                const head = { x: this.snake[0].x + this.dx, y: this.snake[0].y + this.dy };
+
+                // Wall collision
+                if (head.x < 0 || head.x >= this.tileCount || head.y < 0 || head.y >= this.tileCount) {
+                    this.gameOver();
+                    return;
+                }
+
+                // Self collision
+                if (this.snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+                    this.gameOver();
+                    return;
+                }
+
+                this.snake.unshift(head);
+
+                // Eat food
+                if (head.x === this.food.x && head.y === this.food.y) {
+                    this.score += 10;
+                    if (this.score > this.bestScore) {
+                        this.bestScore = this.score;
+                        localStorage.setItem('gamezone_snake_best', this.bestScore);
+                    }
+                    this.updateScoreBoard();
+                    this.spawnFood();
+
+                    // Increase speed slightly with food
+                    if (this.currentSpeed > 40) {
+                        this.currentSpeed = Math.max(40, this.baseSpeed - Math.floor(this.score / 50) * 5);
+                        this.restartLoop();
+                    }
+                } else {
+                    this.snake.pop();
+                }
+
+                this.draw();
+            }
+
+            gameOver() {
+                this.isGameOver = true;
+                this.isPlaying = false;
+                if (gameLoopTimer) clearInterval(gameLoopTimer);
+                
+                this.ctx.fillStyle = 'rgba(11, 15, 25, 0.85)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                this.ctx.fillStyle = '#fe0099';
+                this.ctx.font = 'bold 24px Inter';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2 - 15);
+
+                this.ctx.fillStyle = '#ffffff';
+                this.ctx.font = '14px Inter';
+                this.ctx.fillText(`Final Score: ${this.score}`, this.canvas.width / 2, this.canvas.height / 2 + 20);
+            }
+
+            draw() {
+                // Clear background
+                this.ctx.fillStyle = '#0b0f19';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                // Draw Food
+                this.ctx.fillStyle = '#fe0099';
+                this.ctx.shadowColor = '#fe0099';
+                this.ctx.shadowBlur = 10;
+                this.ctx.beginPath();
+                this.ctx.arc((this.food.x * 20) + 10, (this.food.y * 20) + 10, 8, 0, Math.PI * 2);
+                this.ctx.fill();
+                this.ctx.shadowBlur = 0;
+
+                // Draw Snake
+                this.snake.forEach((segment, index) => {
+                    this.ctx.fillStyle = index === 0 ? '#00f2fe' : '#10b981';
+                    this.ctx.shadowColor = index === 0 ? '#00f2fe' : 'transparent';
+                    this.ctx.shadowBlur = index === 0 ? 8 : 0;
+                    this.ctx.fillRect((segment.x * 20) + 1, (segment.y * 20) + 1, 18, 18);
+                });
+                this.ctx.shadowBlur = 0;
+            }
+
+            updateScoreBoard() {
+                const scoreEl = this.container.querySelector('#snake-score');
+                const bestEl = this.container.querySelector('#snake-best');
+                if (scoreEl) scoreEl.innerText = this.score;
+                if (bestEl) bestEl.innerText = this.bestScore;
+            }
+
+            cleanup() {
+                if (gameLoopTimer) clearInterval(gameLoopTimer);
+                window.removeEventListener('keydown', this.boundKeyHandler);
+            }
+        }
+
+
+        /* ==========================================
+           2. HIT THE MOLE GAME ENGINE
+           ========================================== */
+        class MoleGame {
+            constructor(container) {
+                this.container = container;
+                this.container.appendChild(this.buildUI());
+                
+                this.score = 0;
+                this.timeLeft = 30;
+                this.isPlaying = false;
+                this.activeMoleIndex = null;
+                this.moleTimer = null;
+                this.countdownTimer = null;
+                this.speedMultiplier = 1.0;
+
+                this.setupListeners();
+                this.setDifficulty(currentDifficulty);
+            }
+
+            buildUI() {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col items-center w-full max-w-[420px]';
+                div.innerHTML = `
+                    <div class="flex items-center justify-between w-full mb-4 px-2 text-sm font-bold">
+                        <div class="text-neonCyan">Score: <span id="mole-score">0</span></div>
+                        <div class="text-neonPink">Time: <span id="mole-time">30</span>s</div>
+                    </div>
+                    <!-- 3x3 Grid -->
+                    <div id="mole-grid" class="grid grid-cols-3 gap-3 w-full max-w-[360px] aspect-square mb-6">
+                        <!-- Holes generated in loop -->
+                    </div>
+                    <button id="mole-start-btn" class="px-8 py-3 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink">Start Game</button>
+                `;
+                
+                const grid = div.querySelector('#mole-grid');
+                for (let i = 0; i < 9; i++) {
+                    const hole = document.createElement('div');
+                    hole.className = 'bg-darkBg border-2 border-gray-800 rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer active:scale-95 transition';
+                    hole.setAttribute('data-index', i);
+                    hole.innerHTML = `
+                        <div class="w-16 h-16 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center relative">
+                            <div class="mole-head w-12 h-12 rounded-full bg-amber-700 border-2 border-amber-900 transform translate-y-16 transition-transform duration-150 flex items-center justify-center shadow-lg">
+                                <div class="flex space-x-2 mb-1">
+                                    <div class="w-1.5 h-1.5 bg-black rounded-full"></div>
+                                    <div class="w-1.5 h-1.5 bg-black rounded-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(hole);
+                }
+                return div;
+            }
+
+            setDifficulty(diff) {
+                if (diff === 'easy') this.speedMultiplier = 1.3;
+                else if (diff === 'medium') this.speedMultiplier = 1.0;
+                else this.speedMultiplier = 0.7; // hard
+            }
+
+            setupListeners() {
+                const holes = this.container.querySelectorAll('[data-index]');
+                holes.forEach(hole => {
+                    hole.addEventListener('pointerdown', (e) => {
+                        e.preventDefault();
+                        if (!this.isPlaying) return;
+                        const idx = parseInt(hole.getAttribute('data-index'));
+                        if (idx === this.activeMoleIndex) {
+                            this.score += 10;
+                            this.container.querySelector('#mole-score').innerText = this.score;
+                            this.hideMole(idx);
+                            this.activeMoleIndex = null;
+                        }
+                    });
+                });
+
+                const startBtn = this.container.querySelector('#mole-start-btn');
+                startBtn.addEventListener('click', () => {
+                    this.startGame();
+                });
+            }
+
+            startGame() {
+                this.score = 0;
+                this.timeLeft = 30;
+                this.isPlaying = true;
+                this.activeMoleIndex = null;
+                this.container.querySelector('#mole-score').innerText = this.score;
+                this.container.querySelector('#mole-start-btn').innerText = 'Restart';
+
+                if (gameLoopTimer) clearInterval(gameLoopTimer);
+                if (this.countdownTimer) clearInterval(this.countdownTimer);
+
+                this.countdownTimer = setInterval(() => {
+                    this.timeLeft--;
+                    this.container.querySelector('#mole-time').innerText = this.timeLeft;
+                    if (this.timeLeft <= 0) {
+                        this.endGame();
+                    }
+                }, 1000);
+
+                this.nextMoleCycle();
+            }
+
+            nextMoleCycle() {
+                if (!this.isPlaying) return;
+                
+                if (this.activeMoleIndex !== null) {
+                    this.hideMole(this.activeMoleIndex);
+                }
+
+                this.activeMoleIndex = Math.floor(Math.random() * 9);
+                this.showMole(this.activeMoleIndex);
+
+                const interval = (800 * this.speedMultiplier) + Math.random() * 400;
+                gameLoopTimer = setTimeout(() => this.nextMoleCycle(), interval);
+            }
+
+            showMole(idx) {
+                const holes = this.container.querySelectorAll('[data-index]');
+                const moleHead = holes[idx].querySelector('.mole-head');
+                if (moleHead) {
+                    moleHead.classList.remove('translate-y-16');
+                    moleHead.classList.add('translate-y-0');
+                }
+            }
+
+            hideMole(idx) {
+                const holes = this.container.querySelectorAll('[data-index]');
+                const moleHead = holes[idx].querySelector('.mole-head');
+                if (moleHead) {
+                    moleHead.classList.remove('translate-y-0');
+                    moleHead.classList.add('translate-y-16');
+                }
+            }
+
+            endGame() {
+                this.isPlaying = false;
+                if (gameLoopTimer) clearTimeout(gameLoopTimer);
+                if (this.countdownTimer) clearInterval(this.countdownTimer);
+
+                if (this.activeMoleIndex !== null) {
+                    this.hideMole(this.activeMoleIndex);
+                }
+
+                const viewport = this.container.querySelector('#mole-grid');
+                viewport.innerHTML = `
+                    <div class="col-span-3 flex flex-col items-center justify-center p-8 bg-darkBg rounded-2xl border border-gray-800">
+                        <h3 class="text-2xl font-bold text-neonPink mb-2">Time's Up!</h3>
+                        <p class="text-white text-base mb-4">Final Score: <span class="text-neonCyan font-bold">${this.score}</span></p>
+                    </div>
+                `;
+            }
+
+            cleanup() {
+                if (gameLoopTimer) clearTimeout(gameLoopTimer);
+                if (this.countdownTimer) clearInterval(this.countdownTimer);
+            }
+        }
+
+
+        /* ==========================================
+           3. CUBE TOWER GAME ENGINE
+           ========================================== */
+        class CubeTowerGame {
+            constructor(container) {
+                this.container = container;
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.canvas.width = 400;
+                this.canvas.height = 500;
+                this.canvas.className = 'bg-[#0b0f19] border-2 border-gray-800 rounded-2xl max-w-full shadow-lg';
+
+                this.container.appendChild(this.buildUI());
+                this.container.querySelector('#tower-canvas-wrapper').appendChild(this.canvas);
+
+                this.resetState();
+                this.setupListeners();
+                this.draw();
+            }
+
+            buildUI() {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col items-center w-full';
+                div.innerHTML = `
+                    <div class="flex items-center justify-between w-full max-w-[400px] mb-3 px-2 text-sm font-bold">
+                        <div class="text-neonCyan">Score / Tower Height: <span id="tower-score">0</span></div>
+                    </div>
+                    <div id="tower-canvas-wrapper" class="relative flex justify-center"></div>
+                    <div class="flex items-center justify-center gap-4 mt-4">
+                        <button id="tower-start-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 text-black font-bold text-sm neon-glow-cyan">Start / Drop</button>
+                    </div>
+                `;
+                return div;
+            }
+
+            resetState() {
+                this.score = 0;
+                this.isGameOver = false;
+                this.isPlaying = false;
+                this.blockWidth = 140;
+                this.blockHeight = 25;
+                this.yOffset = 400;
+                this.speed = 3;
+                this.direction = 1;
+                this.towers = [];
+
+                // Base tower block
+                this.towers.push({
+                    x: (400 - this.blockWidth) / 2,
+                    y: this.yOffset,
+                    width: this.blockWidth,
+                    color: '#00f2fe'
+                });
+
+                // Moving block
+                this.currentBlock = {
+                    x: 50,
+                    y: this.yOffset - this.blockHeight,
+                    width: this.blockWidth,
+                    color: '#fe0099'
+                };
+            }
+
+            setDifficulty(diff) {
+                if (diff === 'easy') this.speed = 2;
+                else if (diff === 'medium') this.speed = 3.5;
+                else this.speed = 5; // hard
+            }
+
+            setupListeners() {
+                this.boundKeyHandler = (e) => {
+                    if (e.key === ' ' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.dropBlock();
+                    }
+                };
+                window.addEventListener('keydown', this.boundKeyHandler);
+
+                const startBtn = this.container.querySelector('#tower-start-btn');
+                this.boundActionHandler = (e) => {
+                    e.preventDefault();
+                    if (!this.isPlaying) {
+                        this.startGame();
+                        startBtn.innerText = 'Drop Block';
+                    } else {
+                        this.dropBlock();
+                    }
+                };
+                startBtn.addEventListener('pointerdown', this.boundActionHandler);
+                this.canvas.addEventListener('pointerdown', this.boundActionHandler);
+            }
+
+            startGame() {
+                this.resetState();
+                this.isPlaying = true;
+                this.setDifficulty(currentDifficulty);
+                if (gameLoopTimer) cancelAnimationFrame(gameLoopTimer);
+                this.loop();
+            }
+
+            dropBlock() {
+                if (!this.isPlaying || this.isGameOver) return;
+
+                const prevBlock = this.towers[this.towers.length - 1];
+                const curr = this.currentBlock;
+
+                // Calculate overlap
+                const leftOverlap = Math.max(prevBlock.x, curr.x);
+                const rightOverlap = Math.min(prevBlock.x + prevBlock.width, curr.x + curr.width);
+                const newWidth = rightOverlap - leftOverlap;
+
+                if (newWidth <= 0) {
+                    this.gameOver();
+                    return;
+                }
+
+                // Adjust current block to overlap width & position
+                curr.x = leftOverlap;
+                curr.width = newWidth;
+                this.towers.push({...curr});
+                this.score++;
+                this.container.querySelector('#tower-score').innerText = this.score;
+
+                // Shift camera / tower downwards if stack gets high
+                if (this.towers.length > 8) {
+                    this.towers.forEach(t => t.y += this.blockHeight);
+                }
+
+                // Speed increment & color shift
+                this.speed += 0.2;
+                const colors = ['#00f2fe', '#fe0099', '#9d00ff', '#10b981', '#3b82f6'];
+                const nextColor = colors[this.score % colors.length];
+
+                // Setup next moving block
+                this.currentBlock = {
+                    x: 0,
+                    y: Math.max(100, prevBlock.y - this.blockHeight),
+                    width: newWidth,
+                    color: nextColor
+                };
+            }
+
+            gameOver() {
+                this.isGameOver = true;
+                this.isPlaying = false;
+                if (gameLoopTimer) cancelAnimationFrame(gameLoopTimer);
+                this.container.querySelector('#tower-start-btn').innerText = 'Restart';
+                this.draw();
+            }
+
+            loop() {
+                if (!this.isPlaying || this.isGameOver) return;
+
+                // Move current block horizontally
+                this.currentBlock.x += this.speed * this.direction;
+                if (this.currentBlock.x <= 0 || this.currentBlock.x + this.currentBlock.width >= this.canvas.width) {
+                    this.direction *= -1;
+                }
+
+                this.draw();
+                gameLoopTimer = requestAnimationFrame(() => this.loop());
+            }
+
+            draw() {
+                this.ctx.fillStyle = '#0b0f19';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                // Draw Stacked Towers
+                this.towers.forEach(t => {
+                    this.ctx.fillStyle = t.color;
+                    this.ctx.shadowColor = t.color;
+                    this.ctx.shadowBlur = 8;
+                    this.ctx.fillRect(t.x, t.y, t.width, this.blockHeight);
+                    this.ctx.strokeStyle = '#ffffff';
+                    this.ctx.lineWidth = 1;
+                    this.ctx.strokeRect(t.x, t.y, t.width, this.blockHeight);
+                });
+                this.ctx.shadowBlur = 0;
+
+                // Draw Moving Block if playing
+                if (this.isPlaying && !this.isGameOver) {
+                    const c = this.currentBlock;
+                    this.ctx.fillStyle = c.color;
+                    this.ctx.shadowColor = c.color;
+                    this.ctx.shadowBlur = 12;
+                    this.ctx.fillRect(c.x, c.y, c.width, this.blockHeight);
+                    this.ctx.shadowBlur = 0;
+                }
+
+                if (this.isGameOver) {
+                    this.ctx.fillStyle = 'rgba(11, 15, 25, 0.85)';
+                    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                    this.ctx.fillStyle = '#fe0099';
+                    this.ctx.font = 'bold 24px Inter';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText('TOWER COLLAPSED', this.canvas.width / 2, this.canvas.height / 2 - 15);
+
+                    this.ctx.fillStyle = '#ffffff';
+                    this.ctx.font = '14px Inter';
+                    this.ctx.fillText(`Final Height: ${this.score}`, this.canvas.width / 2, this.canvas.height / 2 + 20);
+                }
+            }
+
+            cleanup() {
+                if (gameLoopTimer) cancelAnimationFrame(gameLoopTimer);
+                window.removeEventListener('keydown', this.boundKeyHandler);
+            }
+        }
+
+
+        /* ==========================================
+           4. HEXTRIS GAME ENGINE
+           ========================================== */
+        class HextrisGame {
+            constructor(container) {
+                this.container = container;
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.canvas.width = 400;
+                this.canvas.height = 420;
+                this.canvas.className = 'bg-[#0b0f19] border-2 border-gray-800 rounded-2xl max-w-full shadow-lg';
+
+                this.container.appendChild(this.buildUI());
+                this.container.querySelector('#hextris-canvas-wrapper').appendChild(this.canvas);
+
+                this.colors = ['#00f2fe', '#fe0099', '#9d00ff', '#f59e0b'];
+                this.resetState();
+                this.setupListeners();
+                this.draw();
+            }
+
+            buildUI() {
+                const div = document.createElement('div');
+                div.className = 'flex flex-col items-center w-full';
+                div.innerHTML = `
+                    <div class="flex items-center justify-between w-full max-w-[400px] mb-3 px-2 text-sm font-bold">
+                        <div class="text-neonCyan">Score: <span id="hextris-score">0</span></div>
+                    </div>
+                    <div id="hextris-canvas-wrapper" class="relative flex justify-center"></div>
+                    <!-- Controls -->
+                    <div class="flex items-center justify-center gap-4 mt-4">
+                        <button id="hextris-left" class="px-6 py-2.5 rounded-xl bg-gray-800 text-neonCyan font-bold text-sm hover:bg-gray-700">↺ Rotate Left</button>
+                        <button id="hextris-start-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink">Start Game</button>
+                        <button id="hextris-right" class="px-6 py-2.5 rounded-xl bg-gray-800 text-neonCyan font-bold text-sm hover:bg-gray-700">Rotate Right ↻</button>
+                    </div>
+                `;
+                return div;
+            }
+
+            resetState() {
+                this.score = 0;
+                this.isGameOver = false;
+                this.isPlaying = false;
+                this.hexAngle = 0; // rotation angle in 60-degree increments (0 to 5)
+                this.blocks = []; // incoming blocks {lane: 0-5, dist: radius, colorIndex}
+                this.spawnTimer = 0;
+                this.spawnInterval = 90;
+                this.blockSpeed = 0.6;
+            }
+
+            setDifficulty(diff) {
+                if (diff === 'easy') this.blockSpeed = 0.4;
+                else if (diff === 'medium') this.blockSpeed = 0.7;
+                else this.blockSpeed = 1.1; // hard
+            }
+
+            setupListeners() {
+                this.boundKeyHandler = (e) => {
+                    if (['ArrowLeft', 'ArrowRight', 'a', 'd', 'A', 'D'].includes(e.key)) {
+                        e.preventDefault();
+                        if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') this.rotateHex(-1);
+                        if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') this.rotateHex(1);
+                    }
+                };
+                window.addEventListener('keydown', this.boundKeyHandler);
+
+                const startBtn = this.container.querySelector('#hextris-start-btn');
+                startBtn.addEventListener('click', () => {
+                    this.startGame();
+                });
+
+                this.container.querySelector('#hextris-left').addEventListener('pointerdown', (e) => { e.preventDefault(); this.rotateHex(-1); });
+                this.container.querySelector('#hextris-right').addEventListener('pointerdown', (e) => { e.preventDefault(); this.rotateHex(1); });
+            }
+
+            rotateHex(dir) {
+                if (!this.isPlaying || this.isGameOver) return;
+                this.hexAngle = (this.hexAngle + dir + 6) % 6;
+                this.draw();
+            }
+
+            startGame() {
+                this.resetState();
+                this.isPlaying = true;
+                this.setDifficulty(currentDifficulty);
+                this.container.querySelector('#hextris-start-btn').innerText = 'Restart';
+                if (gameLoopTimer) cancelAnimationFrame(gameLoopTimer);
+                this.loop();
+            }
+
+            spawnBlock() {
+                const lane = Math.floor(Math.random() * 6);
+                const colorIndex = Math.floor(Math.random() * this.colors.length);
+                this.blocks.push({
+                    lane: lane,
+                    dist: 160, // starting distance from center
+                    colorIndex: colorIndex
+                });
+            }
+
+            loop() {
+                if (!this.isPlaying || this.isGameOver) return;
+
+                this.spawnTimer++;
+                if (this.spawnTimer >= this.spawnInterval) {
+                    this.spawnBlock();
+                    this.spawnTimer = 0;
+                    this.spawnInterval = Math.max(40, this.spawnInterval - 1);
+                }
+
+                // Update blocks approaching center
+                for (let i = this.blocks.length - 1; i >= 0; i--) {
+                    let b = this.blocks[i];
+                    b.dist -= this.blockSpeed;
+
+                    // Reached center collision threshold
+                    if (b.dist <= 35) {
+                        // Check if block lane matches current hexagon bottom/active face or stack
+                        // Simplified Hextris rule: check matches of 3 adjacent in same lane
+                        const matchingLaneBlocks = this.blocks.filter(item => item.lane === b.lane).sort((x, y) => x.dist - y.dist);
+                        
+                        if (b.dist <= 25) {
+                            this.gameOver();
+                            return;
+                        }
+                    }
+                }
+
+                this.checkMatches();
+                this.draw();
+                gameLoopTimer = requestAnimationFrame(() => this.loop());
+            }
+
+            checkMatches() {
+                // Group blocks by lane
+                for (let lane = 0; lane < 6; lane++) {
+                    const laneBlocks = this.blocks.filter(b => b.lane === lane).sort((a, b) => a.dist - b.dist);
+                    if (laneBlocks.length >= 3) {
+                        // Check color sequence
+                        for (let i = 0; i <= laneBlocks.length - 3; i++) {
+                            if (laneBlocks[i].colorIndex === laneBlocks[i+1].colorIndex && 
+                                laneBlocks[i+1].colorIndex === laneBlocks[i+2].colorIndex) {
+                                // Match found! Clear them
+                                const matched = [laneBlocks[i], laneBlocks[i+1], laneBlocks[i+2]];
+                                this.blocks = this.blocks.filter(b => !matched.includes(b));
+                                this.score += 30;
+                                const scoreEl = this.container.querySelector('#hextris-score');
+                                if (scoreEl) scoreEl.innerText = this.score;
+                            }
+                        }
+                    }
+                }
+            }
+
+            gameOver() {
+                this.isGameOver = true;
+                this.isPlaying = false;
+                if (gameLoopTimer) cancelAnimationFrame(gameLoopTimer);
+                this.draw();
+            }
+
+            draw() {
+                this.ctx.fillStyle = '#0b0f19';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                const cx = this.canvas.width / 2;
+                const cy = this.canvas.height / 2;
+
+                // Draw Central Hexagon
+                this.ctx.save();
+                this.ctx.translate(cx, cy);
+                this.ctx.rotate((this.hexAngle * Math.PI) / 3);
+
+                for (let i = 0; i < 6; i++) {
+                    this.ctx.save();
+                    this.ctx.rotate((i * Math.PI) / 3);
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(0, 0);
+                    this.ctx.lineTo(25, 0);
+                    this.ctx.lineTo(12.5, 21.65);
+                    this.ctx.closePath();
+                    this.ctx.fillStyle = this.colors[i % this.colors.length];
+                    this.ctx.fill();
+                    this.ctx.restore();
+                }
+                this.ctx.restore();
+
+                // Draw Incoming Blocks along 6 lanes
+                this.blocks.forEach(b => {
+                    const angle = (b.lane * Math.PI) / 3;
+                    const bx = cx + Math.cos(angle) * b.dist;
+                    const by = cy + Math.sin(angle) * b.dist;
+
+                    this.ctx.fillStyle = this.colors[b.colorIndex];
+                    this.ctx.shadowColor = this.colors[b.colorIndex];
+                    this.ctx.shadowBlur = 10;
+                    this.ctx.beginPath();
+                    this.ctx.arc(bx, by, 8, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    this.ctx.shadowBlur = 0;
+                });
+
+                if (this.isGameOver) {
+                    this.ctx.fillStyle = 'rgba(11, 15, 25, 0.85)';
+                    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                    this.ctx.fillStyle = '#fe0099';
+                    this.ctx.font = 'bold 24px Inter';
+                    this.ctx.textAlign = 'center';
+                    this.ctx.fillText('OVERFLOW', cx, cy - 15);
+
+                    this.ctx.fillStyle = '#ffffff';
+                    this.ctx.font = '14px Inter';
+                    this.ctx.fillText(`Final Score: ${this.score}`, cx, cy + 20);
+                }
+            }
+
+            cleanup() {
+                if (gameLoopTimer) cancelAnimationFrame(gameLoopTimer);
+                window.removeEventListener('keydown', this.boundKeyHandler);
+            }
         }
     </script>
 </body>
