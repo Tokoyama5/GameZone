@@ -28,7 +28,6 @@
             font-family: 'Inter', sans-serif;
             background-color: #0b0f19;
             color: #f3f4f6;
-            touch-action: manipulation;
             user-select: none;
             -webkit-user-select: none;
         }
@@ -72,7 +71,7 @@
 <body class="min-h-screen flex flex-col justify-between selection:bg-neonCyan selection:text-black">
 
     <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/80 border-b border-gray-800">
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/90 border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('home')">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-neonCyan to-neonPink flex items-center justify-center neon-glow-cyan">
@@ -166,7 +165,7 @@
                             </div>
                             <span class="text-xs font-bold uppercase tracking-wider text-neonPink bg-pink-950/60 px-2.5 py-1 rounded-md border border-pink-800/50">Arcade</span>
                             <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-neonPink transition">Hit the Mole</h3>
-                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Test your reflexes! Tap moles as fast as you can before the 30-second timer expires.</p>
+                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Test your reflexes! Direct tap moles instantly before the 30-second timer expires.</p>
                         </div>
                         <div class="p-6 pt-0">
                             <button onclick="launchGame('mole')" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink transition active:scale-95 flex items-center justify-center space-x-2">
@@ -184,7 +183,7 @@
                             </div>
                             <span class="text-xs font-bold uppercase tracking-wider text-blue-400 bg-blue-950/60 px-2.5 py-1 rounded-md border border-blue-800/50">Arcade</span>
                             <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-neonCyan transition">Cube Tower</h3>
-                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Stack moving blocks precisely to build the tallest skyscraper tower possible!</p>
+                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Direct touch anywhere on screen to drop and build the tallest skyscraper tower!</p>
                         </div>
                         <div class="p-6 pt-0">
                             <button onclick="launchGame('tower')" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 text-black font-bold text-sm neon-glow-cyan transition active:scale-95 flex items-center justify-center space-x-2">
@@ -202,7 +201,7 @@
                             </div>
                             <span class="text-xs font-bold uppercase tracking-wider text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800/50">Puzzle</span>
                             <h3 class="text-xl font-bold text-white mt-3 mb-1 group-hover:text-neonPink transition">Hextris</h3>
-                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Rotate the central hexagon to match incoming colored blocks and clear them before overflow!</p>
+                            <p class="text-sm text-gray-400 mb-4 line-clamp-2">Tap left or right side of screen to instantly rotate and match incoming colored blocks!</p>
                         </div>
                         <div class="p-6 pt-0">
                             <button onclick="launchGame('hextris')" class="w-full py-3 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink transition active:scale-95 flex items-center justify-center space-x-2">
@@ -219,20 +218,20 @@
                 <div class="bg-cardBg/60 backdrop-blur rounded-3xl p-8 sm:p-12 border border-gray-800">
                     <h2 class="text-3xl font-extrabold text-white mb-4 text-glow-cyan">About GameZone</h2>
                     <p class="text-gray-300 text-base sm:text-lg leading-relaxed mb-6">
-                        GameZone is a high-performance web gaming platform designed for gamers who love instant entertainment without bulky downloads or intrusive advertisements. Built with pure HTML5, CSS3, and vanilla JavaScript, GameZone features optimized game engines that load in milliseconds and adapt seamlessly to mobile, tablet, and desktop screens.
+                        GameZone is a high-performance web gaming platform designed for gamers who love instant entertainment without bulky downloads or intrusive advertisements. Built with pure HTML5, CSS3, and vanilla JavaScript, GameZone features optimized game engines with direct touch controls that load in milliseconds and adapt seamlessly to mobile, tablet, and desktop screens.
                     </p>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-gray-800">
                         <div>
-                            <h4 class="text-neonCyan font-bold text-lg mb-1">Lightning Fast</h4>
-                            <p class="text-sm text-gray-400">Zero dependencies and optimized lightweight rendering loops.</p>
+                            <h4 class="text-neonCyan font-bold text-lg mb-1">Direct Touch</h4>
+                            <p class="text-sm text-gray-400">Tap directly on game canvases or elements for ultra-responsive mobile play.</p>
                         </div>
                         <div>
-                            <h4 class="text-neonPink font-bold text-lg mb-1">Cross-Platform</h4>
-                            <p class="text-sm text-gray-400">Responsive touch layouts & keyboard controls for every device.</p>
+                            <h4 class="text-neonPink font-bold text-lg mb-1">Difficulty Modes</h4>
+                            <p class="text-sm text-gray-400">Scale speed dynamically between Easy, Medium, and Hard.</p>
                         </div>
                         <div>
                             <h4 class="text-purple-400 font-bold text-lg mb-1">Pure Vanilla</h4>
-                            <p class="text-sm text-gray-400">Crafted strictly using native browser APIs and custom math engines.</p>
+                            <p class="text-sm text-gray-400">Crafted strictly using native browser APIs and custom math loops.</p>
                         </div>
                     </div>
                 </div>
@@ -256,11 +255,11 @@
                     </div>
                     <div class="flex items-center space-x-4">
                         <!-- Instagram Link -->
-                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-2xl bg-cardBg border border-gray-700 hover:border-neonPink hover:text-neonPink flex items-center justify-center text-gray-300 transition neon-glow-pink">
+                        <a href="https://www.instagram.com/i.toko_67?psln=Nm8wNHBzN2cxcG5r" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-2xl bg-cardBg border border-gray-700 hover:border-neonPink hover:text-neonPink flex items-center justify-center text-gray-300 transition neon-glow-pink">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         </a>
-                        <!-- Twitter Link -->
-                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-2xl bg-cardBg border border-gray-700 hover:border-neonCyan hover:text-neonCyan flex items-center justify-center text-gray-300 transition neon-glow-cyan">
+                        <!-- Twitter/X Link -->
+                        <a href="https://x.com/ui_fathi" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-2xl bg-cardBg border border-gray-700 hover:border-neonCyan hover:text-neonCyan flex items-center justify-center text-gray-300 transition neon-glow-cyan">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                         </a>
                     </div>
@@ -280,7 +279,7 @@
                 
                 <!-- Difficulty Selector -->
                 <div class="flex items-center space-x-2">
-                    <span class="text-xs text-gray-400 font-semibold uppercase">Speed:</span>
+                    <span class="text-xs text-gray-400 font-semibold uppercase">Difficulty:</span>
                     <select id="difficulty-select" onchange="changeDifficulty(this.value)" class="bg-darkBg border border-gray-700 text-neonCyan font-bold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-neonCyan">
                         <option value="easy">Easy</option>
                         <option value="medium" selected>Medium</option>
@@ -307,8 +306,8 @@
         <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p>&copy; 2026 GameZone. Created by <span class="text-neonCyan font-bold">Tokuyama</span>. All rights reserved.</p>
             <div class="flex space-x-6 text-gray-400">
-                <a href="https://instagram.com" target="_blank" class="hover:text-neonPink transition">Instagram</a>
-                <a href="https://twitter.com" target="_blank" class="hover:text-neonCyan transition">Twitter</a>
+                <a href="https://www.instagram.com/i.toko_67?psln=Nm8wNHBzN2cxcG5r" target="_blank" class="hover:text-neonPink transition">Instagram</a>
+                <a href="https://x.com/ui_fathi" target="_blank" class="hover:text-neonCyan transition">Twitter</a>
                 <a href="#" onclick="switchView('home'); return false;" class="hover:text-white transition">Privacy & Terms</a>
             </div>
         </div>
@@ -352,13 +351,16 @@
             }
             currentGame = null;
             if (gameLoopTimer) {
-                clearInterval(gameLoopTimer);
+                if (typeof gameLoopTimer === 'number') clearInterval(gameLoopTimer);
+                else cancelAnimationFrame(gameLoopTimer);
                 gameLoopTimer = null;
             }
         }
 
         function changeDifficulty(val) {
             currentDifficulty = val;
+            const selectEl = document.getElementById('difficulty-select');
+            if (selectEl) selectEl.value = val;
             if (currentGame && typeof currentGame.setDifficulty === 'function') {
                 currentGame.setDifficulty(val);
             }
@@ -410,6 +412,10 @@
             const viewport = document.getElementById('active-game-viewport');
             viewport.innerHTML = '';
 
+            // Ensure difficulty dropdown matches current setting
+            const selectEl = document.getElementById('difficulty-select');
+            if (selectEl) selectEl.value = currentDifficulty;
+
             if (gameKey === 'snake') {
                 document.getElementById('game-title-header').innerText = 'Snake Classic';
                 currentGame = new SnakeGame(viewport);
@@ -427,61 +433,62 @@
 
 
         /* ==========================================
-           1. SNAKE GAME ENGINE
+           1. SNAKE GAME ENGINE (Direct Touch & Swipe)
            ========================================== */
         class SnakeGame {
             constructor(container) {
                 this.container = container;
                 this.canvas = document.createElement('canvas');
                 this.ctx = this.canvas.getContext('2d');
-                this.canvas.width = 400;
-                this.canvas.height = 400;
+                this.canvas.width = 380;
+                this.canvas.height = 380;
+                this.canvas.style.touchAction = 'none';
                 this.canvas.className = 'bg-[#0b0f19] border-2 border-gray-800 rounded-2xl max-w-full shadow-lg';
                 
                 this.container.appendChild(this.buildUI());
                 this.container.querySelector('#snake-canvas-wrapper').appendChild(this.canvas);
 
+                this.tileCount = 19;
                 this.gridSize = 20;
-                this.tileCount = 20;
                 this.resetState();
                 this.setupListeners();
                 this.updateScoreBoard();
+                this.draw();
             }
 
             buildUI() {
                 const div = document.createElement('div');
                 div.className = 'flex flex-col items-center w-full';
                 div.innerHTML = `
-                    <div class="flex items-center justify-between w-full max-w-[400px] mb-3 px-2 text-sm font-bold">
+                    <div class="flex items-center justify-between w-full max-w-[380px] mb-3 px-2 text-sm font-bold">
                         <div class="text-neonCyan">Score: <span id="snake-score">0</span></div>
                         <div class="text-neonPink">Best: <span id="snake-best">0</span></div>
                     </div>
                     <div id="snake-canvas-wrapper" class="relative flex justify-center"></div>
-                    <!-- Controls overlay for touch & pause -->
                     <div class="flex items-center justify-center gap-4 mt-4">
                         <button id="snake-start-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neonCyan to-teal-400 text-black font-bold text-sm neon-glow-cyan">Start Game</button>
                         <button id="snake-pause-btn" class="px-6 py-2.5 rounded-xl bg-gray-800 text-white font-bold text-sm hover:bg-gray-700 hidden">Pause</button>
                     </div>
-                    <!-- Mobile Touch D-Pad -->
-                    <div class="grid grid-cols-3 gap-2 mt-4 max-w-[220px] w-full">
+                    <!-- Virtual D-Pad for mobile touch -->
+                    <div class="grid grid-cols-3 gap-2 mt-4 max-w-[200px] w-full">
                         <div></div>
-                        <button id="btn-up" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">⬆️</button>
+                        <button id="btn-up" class="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-base active:bg-neonCyan active:text-black">⬆️</button>
                         <div></div>
-                        <button id="btn-left" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">⬅️</button>
-                        <button id="btn-down" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">⬇️</button>
-                        <button id="btn-right" class="p-4 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-lg active:bg-neonCyan active:text-black">➡️</button>
+                        <button id="btn-left" class="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-base active:bg-neonCyan active:text-black">⬅️</button>
+                        <button id="btn-down" class="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-base active:bg-neonCyan active:text-black">⬇️</button>
+                        <button id="btn-right" class="p-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-neonCyan font-bold flex items-center justify-center text-base active:bg-neonCyan active:text-black">➡️</button>
                     </div>
                 `;
                 return div;
             }
 
             resetState() {
-                this.snake = [{x: 10, y: 10}, {x: 9, y: 10}, {x: 8, y: 10}];
+                this.snake = [{x: 9, y: 9}, {x: 8, y: 9}, {x: 7, y: 9}];
                 this.dx = 1;
                 this.dy = 0;
                 this.nextDx = 1;
                 this.nextDy = 0;
-                this.food = {x: 5, y: 5};
+                this.food = {x: 4, y: 4};
                 this.score = 0;
                 this.bestScore = localStorage.getItem('gamezone_snake_best') || 0;
                 this.isGameOver = false;
@@ -493,13 +500,14 @@
             }
 
             getSpeedByDifficulty(diff) {
-                if (diff === 'easy') return 140;
-                if (diff === 'medium') return 100;
-                return 70; // hard
+                if (diff === 'easy') return 150;
+                if (diff === 'medium') return 110;
+                return 75; // hard
             }
 
             setDifficulty(diff) {
                 this.baseSpeed = this.getSpeedByDifficulty(diff);
+                this.currentSpeed = this.baseSpeed;
                 if (this.isPlaying && !this.isPaused) {
                     this.restartLoop();
                 }
@@ -517,6 +525,31 @@
                     if ((e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') && this.dx === 0) { this.nextDx = 1; this.nextDy = 0; }
                 };
                 window.addEventListener('keydown', this.boundKeyHandler);
+
+                // Swipe / Direct touch on canvas
+                let touchStartX = 0;
+                let touchStartY = 0;
+                this.canvas.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    if (e.touches.length > 0) {
+                        touchStartX = e.touches[0].clientX;
+                        touchStartY = e.touches[0].clientY;
+                    }
+                }, {passive: false});
+
+                this.canvas.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    if (!this.isPlaying || this.isPaused || e.changedTouches.length === 0) return;
+                    let dx = e.changedTouches[0].clientX - touchStartX;
+                    let dy = e.changedTouches[0].clientY - touchStartY;
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        if (dx > 20 && this.dx === 0) { this.nextDx = 1; this.nextDy = 0; }
+                        else if (dx < -20 && this.dx === 0) { this.nextDx = -1; this.nextDy = 0; }
+                    } else {
+                        if (dy > 20 && this.dy === 0) { this.nextDx = 0; this.nextDy = 1; }
+                        else if (dy < -20 && this.dy === 0) { this.nextDx = 0; this.nextDy = -1; }
+                    }
+                }, {passive: false});
 
                 const bindBtn = (id, dx, dy) => {
                     const el = this.container.querySelector(id);
@@ -608,8 +641,8 @@
                     this.spawnFood();
 
                     // Increase speed slightly with food
-                    if (this.currentSpeed > 40) {
-                        this.currentSpeed = Math.max(40, this.baseSpeed - Math.floor(this.score / 50) * 5);
+                    if (this.currentSpeed > 45) {
+                        this.currentSpeed = Math.max(45, this.baseSpeed - Math.floor(this.score / 40) * 4);
                         this.restartLoop();
                     }
                 } else {
@@ -623,22 +656,10 @@
                 this.isGameOver = true;
                 this.isPlaying = false;
                 if (gameLoopTimer) clearInterval(gameLoopTimer);
-                
-                this.ctx.fillStyle = 'rgba(11, 15, 25, 0.85)';
-                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-                this.ctx.fillStyle = '#fe0099';
-                this.ctx.font = 'bold 24px Inter';
-                this.ctx.textAlign = 'center';
-                this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2 - 15);
-
-                this.ctx.fillStyle = '#ffffff';
-                this.ctx.font = '14px Inter';
-                this.ctx.fillText(`Final Score: ${this.score}`, this.canvas.width / 2, this.canvas.height / 2 + 20);
+                this.drawFinalScreen();
             }
 
             draw() {
-                // Clear background
                 this.ctx.fillStyle = '#0b0f19';
                 this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -661,6 +682,21 @@
                 this.ctx.shadowBlur = 0;
             }
 
+            drawFinalScreen() {
+                this.draw();
+                this.ctx.fillStyle = 'rgba(11, 15, 25, 0.85)';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+                this.ctx.fillStyle = '#fe0099';
+                this.ctx.font = 'bold 22px Inter';
+                this.ctx.textAlign = 'center';
+                this.ctx.fillText('GAME OVER', this.canvas.width / 2, this.canvas.height / 2 - 15);
+
+                this.ctx.fillStyle = '#ffffff';
+                this.ctx.font = '14px Inter';
+                this.ctx.fillText(`Final Score: ${this.score}`, this.canvas.width / 2, this.canvas.height / 2 + 20);
+            }
+
             updateScoreBoard() {
                 const scoreEl = this.container.querySelector('#snake-score');
                 const bestEl = this.container.querySelector('#snake-best');
@@ -676,7 +712,7 @@
 
 
         /* ==========================================
-           2. HIT THE MOLE GAME ENGINE
+           2. HIT THE MOLE GAME ENGINE (Direct Touch)
            ========================================== */
         class MoleGame {
             constructor(container) {
@@ -687,7 +723,6 @@
                 this.timeLeft = 30;
                 this.isPlaying = false;
                 this.activeMoleIndex = null;
-                this.moleTimer = null;
                 this.countdownTimer = null;
                 this.speedMultiplier = 1.0;
 
@@ -697,27 +732,26 @@
 
             buildUI() {
                 const div = document.createElement('div');
-                div.className = 'flex flex-col items-center w-full max-w-[420px]';
+                div.className = 'flex flex-col items-center w-full max-w-[400px]';
                 div.innerHTML = `
                     <div class="flex items-center justify-between w-full mb-4 px-2 text-sm font-bold">
                         <div class="text-neonCyan">Score: <span id="mole-score">0</span></div>
                         <div class="text-neonPink">Time: <span id="mole-time">30</span>s</div>
                     </div>
-                    <!-- 3x3 Grid -->
-                    <div id="mole-grid" class="grid grid-cols-3 gap-3 w-full max-w-[360px] aspect-square mb-6">
-                        <!-- Holes generated in loop -->
-                    </div>
+                    <!-- 3x3 Grid with direct tap holes -->
+                    <div id="mole-grid" class="grid grid-cols-3 gap-3 w-full max-w-[340px] aspect-square mb-6 touch-none"></div>
                     <button id="mole-start-btn" class="px-8 py-3 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink">Start Game</button>
                 `;
                 
                 const grid = div.querySelector('#mole-grid');
                 for (let i = 0; i < 9; i++) {
                     const hole = document.createElement('div');
-                    hole.className = 'bg-darkBg border-2 border-gray-800 rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer active:scale-95 transition';
+                    hole.className = 'bg-darkBg border-2 border-gray-800 rounded-2xl flex items-center justify-center relative overflow-hidden cursor-pointer select-none';
+                    hole.style.touchAction = 'none';
                     hole.setAttribute('data-index', i);
                     hole.innerHTML = `
-                        <div class="w-16 h-16 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center relative">
-                            <div class="mole-head w-12 h-12 rounded-full bg-amber-700 border-2 border-amber-900 transform translate-y-16 transition-transform duration-150 flex items-center justify-center shadow-lg">
+                        <div class="w-16 h-16 rounded-full bg-gray-900 border border-gray-800 flex items-center justify-center relative pointer-events-none">
+                            <div class="mole-head w-12 h-12 rounded-full bg-amber-700 border-2 border-amber-900 transform translate-y-16 transition-transform duration-100 flex items-center justify-center shadow-lg pointer-events-none">
                                 <div class="flex space-x-2 mb-1">
                                     <div class="w-1.5 h-1.5 bg-black rounded-full"></div>
                                     <div class="w-1.5 h-1.5 bg-black rounded-full"></div>
@@ -731,7 +765,7 @@
             }
 
             setDifficulty(diff) {
-                if (diff === 'easy') this.speedMultiplier = 1.3;
+                if (diff === 'easy') this.speedMultiplier = 1.4;
                 else if (diff === 'medium') this.speedMultiplier = 1.0;
                 else this.speedMultiplier = 0.7; // hard
             }
@@ -739,7 +773,7 @@
             setupListeners() {
                 const holes = this.container.querySelectorAll('[data-index]');
                 holes.forEach(hole => {
-                    hole.addEventListener('pointerdown', (e) => {
+                    const handleHit = (e) => {
                         e.preventDefault();
                         if (!this.isPlaying) return;
                         const idx = parseInt(hole.getAttribute('data-index'));
@@ -749,7 +783,8 @@
                             this.hideMole(idx);
                             this.activeMoleIndex = null;
                         }
-                    });
+                    };
+                    hole.addEventListener('pointerdown', handleHit);
                 });
 
                 const startBtn = this.container.querySelector('#mole-start-btn');
@@ -764,9 +799,10 @@
                 this.isPlaying = true;
                 this.activeMoleIndex = null;
                 this.container.querySelector('#mole-score').innerText = this.score;
+                this.container.querySelector('#mole-time').innerText = this.timeLeft;
                 this.container.querySelector('#mole-start-btn').innerText = 'Restart';
 
-                if (gameLoopTimer) clearInterval(gameLoopTimer);
+                if (gameLoopTimer) clearTimeout(gameLoopTimer);
                 if (this.countdownTimer) clearInterval(this.countdownTimer);
 
                 this.countdownTimer = setInterval(() => {
@@ -790,25 +826,29 @@
                 this.activeMoleIndex = Math.floor(Math.random() * 9);
                 this.showMole(this.activeMoleIndex);
 
-                const interval = (800 * this.speedMultiplier) + Math.random() * 400;
+                const interval = (800 * this.speedMultiplier) + Math.random() * 300;
                 gameLoopTimer = setTimeout(() => this.nextMoleCycle(), interval);
             }
 
             showMole(idx) {
                 const holes = this.container.querySelectorAll('[data-index]');
-                const moleHead = holes[idx].querySelector('.mole-head');
-                if (moleHead) {
-                    moleHead.classList.remove('translate-y-16');
-                    moleHead.classList.add('translate-y-0');
+                if (holes[idx]) {
+                    const moleHead = holes[idx].querySelector('.mole-head');
+                    if (moleHead) {
+                        moleHead.classList.remove('translate-y-16');
+                        moleHead.classList.add('translate-y-0');
+                    }
                 }
             }
 
             hideMole(idx) {
                 const holes = this.container.querySelectorAll('[data-index]');
-                const moleHead = holes[idx].querySelector('.mole-head');
-                if (moleHead) {
-                    moleHead.classList.remove('translate-y-0');
-                    moleHead.classList.add('translate-y-16');
+                if (holes[idx]) {
+                    const moleHead = holes[idx].querySelector('.mole-head');
+                    if (moleHead) {
+                        moleHead.classList.remove('translate-y-0');
+                        moleHead.classList.add('translate-y-16');
+                    }
                 }
             }
 
@@ -838,15 +878,16 @@
 
 
         /* ==========================================
-           3. CUBE TOWER GAME ENGINE
+           3. CUBE TOWER GAME ENGINE (Direct Tap to Drop)
            ========================================== */
         class CubeTowerGame {
             constructor(container) {
                 this.container = container;
                 this.canvas = document.createElement('canvas');
                 this.ctx = this.canvas.getContext('2d');
-                this.canvas.width = 400;
-                this.canvas.height = 500;
+                this.canvas.width = 380;
+                this.canvas.height = 460;
+                this.canvas.style.touchAction = 'none';
                 this.canvas.className = 'bg-[#0b0f19] border-2 border-gray-800 rounded-2xl max-w-full shadow-lg';
 
                 this.container.appendChild(this.buildUI());
@@ -861,12 +902,12 @@
                 const div = document.createElement('div');
                 div.className = 'flex flex-col items-center w-full';
                 div.innerHTML = `
-                    <div class="flex items-center justify-between w-full max-w-[400px] mb-3 px-2 text-sm font-bold">
-                        <div class="text-neonCyan">Score / Tower Height: <span id="tower-score">0</span></div>
+                    <div class="flex items-center justify-between w-full max-w-[380px] mb-3 px-2 text-sm font-bold">
+                        <div class="text-neonCyan">Score / Height: <span id="tower-score">0</span></div>
                     </div>
                     <div id="tower-canvas-wrapper" class="relative flex justify-center"></div>
                     <div class="flex items-center justify-center gap-4 mt-4">
-                        <button id="tower-start-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 text-black font-bold text-sm neon-glow-cyan">Start / Drop</button>
+                        <button id="tower-start-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neonCyan to-blue-500 text-black font-bold text-sm neon-glow-cyan">Start / Tap Screen to Drop</button>
                     </div>
                 `;
                 return div;
@@ -877,23 +918,21 @@
                 this.isGameOver = false;
                 this.isPlaying = false;
                 this.blockWidth = 140;
-                this.blockHeight = 25;
-                this.yOffset = 400;
+                this.blockHeight = 24;
+                this.yOffset = 380;
                 this.speed = 3;
                 this.direction = 1;
                 this.towers = [];
 
-                // Base tower block
                 this.towers.push({
-                    x: (400 - this.blockWidth) / 2,
+                    x: (380 - this.blockWidth) / 2,
                     y: this.yOffset,
                     width: this.blockWidth,
                     color: '#00f2fe'
                 });
 
-                // Moving block
                 this.currentBlock = {
-                    x: 50,
+                    x: 30,
                     y: this.yOffset - this.blockHeight,
                     width: this.blockWidth,
                     color: '#fe0099'
@@ -901,9 +940,9 @@
             }
 
             setDifficulty(diff) {
-                if (diff === 'easy') this.speed = 2;
-                else if (diff === 'medium') this.speed = 3.5;
-                else this.speed = 5; // hard
+                if (diff === 'easy') this.speed = 2.2;
+                else if (diff === 'medium') this.speed = 3.6;
+                else this.speed = 5.2; // hard
             }
 
             setupListeners() {
@@ -920,13 +959,21 @@
                     e.preventDefault();
                     if (!this.isPlaying) {
                         this.startGame();
-                        startBtn.innerText = 'Drop Block';
+                        startBtn.innerText = 'Tap Screen to Drop';
                     } else {
                         this.dropBlock();
                     }
                 };
                 startBtn.addEventListener('pointerdown', this.boundActionHandler);
-                this.canvas.addEventListener('pointerdown', this.boundActionHandler);
+                this.canvas.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
+                    if (!this.isPlaying) {
+                        this.startGame();
+                        startBtn.innerText = 'Tap Screen to Drop';
+                    } else {
+                        this.dropBlock();
+                    }
+                });
             }
 
             startGame() {
@@ -943,7 +990,6 @@
                 const prevBlock = this.towers[this.towers.length - 1];
                 const curr = this.currentBlock;
 
-                // Calculate overlap
                 const leftOverlap = Math.max(prevBlock.x, curr.x);
                 const rightOverlap = Math.min(prevBlock.x + prevBlock.width, curr.x + curr.width);
                 const newWidth = rightOverlap - leftOverlap;
@@ -953,27 +999,23 @@
                     return;
                 }
 
-                // Adjust current block to overlap width & position
                 curr.x = leftOverlap;
                 curr.width = newWidth;
                 this.towers.push({...curr});
                 this.score++;
                 this.container.querySelector('#tower-score').innerText = this.score;
 
-                // Shift camera / tower downwards if stack gets high
-                if (this.towers.length > 8) {
+                if (this.towers.length > 7) {
                     this.towers.forEach(t => t.y += this.blockHeight);
                 }
 
-                // Speed increment & color shift
-                this.speed += 0.2;
+                this.speed += 0.15;
                 const colors = ['#00f2fe', '#fe0099', '#9d00ff', '#10b981', '#3b82f6'];
                 const nextColor = colors[this.score % colors.length];
 
-                // Setup next moving block
                 this.currentBlock = {
                     x: 0,
-                    y: Math.max(100, prevBlock.y - this.blockHeight),
+                    y: Math.max(80, prevBlock.y - this.blockHeight),
                     width: newWidth,
                     color: nextColor
                 };
@@ -990,7 +1032,6 @@
             loop() {
                 if (!this.isPlaying || this.isGameOver) return;
 
-                // Move current block horizontally
                 this.currentBlock.x += this.speed * this.direction;
                 if (this.currentBlock.x <= 0 || this.currentBlock.x + this.currentBlock.width >= this.canvas.width) {
                     this.direction *= -1;
@@ -1004,7 +1045,6 @@
                 this.ctx.fillStyle = '#0b0f19';
                 this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-                // Draw Stacked Towers
                 this.towers.forEach(t => {
                     this.ctx.fillStyle = t.color;
                     this.ctx.shadowColor = t.color;
@@ -1016,7 +1056,6 @@
                 });
                 this.ctx.shadowBlur = 0;
 
-                // Draw Moving Block if playing
                 if (this.isPlaying && !this.isGameOver) {
                     const c = this.currentBlock;
                     this.ctx.fillStyle = c.color;
@@ -1031,7 +1070,7 @@
                     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
                     this.ctx.fillStyle = '#fe0099';
-                    this.ctx.font = 'bold 24px Inter';
+                    this.ctx.font = 'bold 22px Inter';
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText('TOWER COLLAPSED', this.canvas.width / 2, this.canvas.height / 2 - 15);
 
@@ -1049,15 +1088,16 @@
 
 
         /* ==========================================
-           4. HEXTRIS GAME ENGINE
+           4. HEXTRIS GAME ENGINE (Direct Tap Left/Right)
            ========================================== */
         class HextrisGame {
             constructor(container) {
                 this.container = container;
                 this.canvas = document.createElement('canvas');
                 this.ctx = this.canvas.getContext('2d');
-                this.canvas.width = 400;
-                this.canvas.height = 420;
+                this.canvas.width = 380;
+                this.canvas.height = 400;
+                this.canvas.style.touchAction = 'none';
                 this.canvas.className = 'bg-[#0b0f19] border-2 border-gray-800 rounded-2xl max-w-full shadow-lg';
 
                 this.container.appendChild(this.buildUI());
@@ -1073,11 +1113,11 @@
                 const div = document.createElement('div');
                 div.className = 'flex flex-col items-center w-full';
                 div.innerHTML = `
-                    <div class="flex items-center justify-between w-full max-w-[400px] mb-3 px-2 text-sm font-bold">
+                    <div class="flex items-center justify-between w-full max-w-[380px] mb-3 px-2 text-sm font-bold">
                         <div class="text-neonCyan">Score: <span id="hextris-score">0</span></div>
                     </div>
                     <div id="hextris-canvas-wrapper" class="relative flex justify-center"></div>
-                    <!-- Controls -->
+                    <!-- Controls (Direct canvas tap left/right supported too) -->
                     <div class="flex items-center justify-center gap-4 mt-4">
                         <button id="hextris-left" class="px-6 py-2.5 rounded-xl bg-gray-800 text-neonCyan font-bold text-sm hover:bg-gray-700">↺ Rotate Left</button>
                         <button id="hextris-start-btn" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-neonPink to-purple-600 text-white font-bold text-sm neon-glow-pink">Start Game</button>
@@ -1091,17 +1131,17 @@
                 this.score = 0;
                 this.isGameOver = false;
                 this.isPlaying = false;
-                this.hexAngle = 0; // rotation angle in 60-degree increments (0 to 5)
-                this.blocks = []; // incoming blocks {lane: 0-5, dist: radius, colorIndex}
+                this.hexAngle = 0;
+                this.blocks = [];
                 this.spawnTimer = 0;
-                this.spawnInterval = 90;
-                this.blockSpeed = 0.6;
+                this.spawnInterval = 85;
+                this.blockSpeed = 0.55;
             }
 
             setDifficulty(diff) {
-                if (diff === 'easy') this.blockSpeed = 0.4;
-                else if (diff === 'medium') this.blockSpeed = 0.7;
-                else this.blockSpeed = 1.1; // hard
+                if (diff === 'easy') this.blockSpeed = 0.35;
+                else if (diff === 'medium') this.blockSpeed = 0.65;
+                else this.blockSpeed = 1.0; // hard
             }
 
             setupListeners() {
@@ -1113,6 +1153,19 @@
                     }
                 };
                 window.addEventListener('keydown', this.boundKeyHandler);
+
+                // Direct touch on canvas: Left side rotates left, Right side rotates right
+                this.canvas.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
+                    if (!this.isPlaying || this.isGameOver) return;
+                    const rect = this.canvas.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    if (x < this.canvas.width / 2) {
+                        this.rotateHex(-1);
+                    } else {
+                        this.rotateHex(1);
+                    }
+                });
 
                 const startBtn = this.container.querySelector('#hextris-start-btn');
                 startBtn.addEventListener('click', () => {
@@ -1143,7 +1196,7 @@
                 const colorIndex = Math.floor(Math.random() * this.colors.length);
                 this.blocks.push({
                     lane: lane,
-                    dist: 160, // starting distance from center
+                    dist: 150,
                     colorIndex: colorIndex
                 });
             }
@@ -1155,24 +1208,16 @@
                 if (this.spawnTimer >= this.spawnInterval) {
                     this.spawnBlock();
                     this.spawnTimer = 0;
-                    this.spawnInterval = Math.max(40, this.spawnInterval - 1);
+                    this.spawnInterval = Math.max(35, this.spawnInterval - 1);
                 }
 
-                // Update blocks approaching center
                 for (let i = this.blocks.length - 1; i >= 0; i--) {
                     let b = this.blocks[i];
                     b.dist -= this.blockSpeed;
 
-                    // Reached center collision threshold
-                    if (b.dist <= 35) {
-                        // Check if block lane matches current hexagon bottom/active face or stack
-                        // Simplified Hextris rule: check matches of 3 adjacent in same lane
-                        const matchingLaneBlocks = this.blocks.filter(item => item.lane === b.lane).sort((x, y) => x.dist - y.dist);
-                        
-                        if (b.dist <= 25) {
-                            this.gameOver();
-                            return;
-                        }
+                    if (b.dist <= 26) {
+                        this.gameOver();
+                        return;
                     }
                 }
 
@@ -1182,15 +1227,12 @@
             }
 
             checkMatches() {
-                // Group blocks by lane
                 for (let lane = 0; lane < 6; lane++) {
                     const laneBlocks = this.blocks.filter(b => b.lane === lane).sort((a, b) => a.dist - b.dist);
                     if (laneBlocks.length >= 3) {
-                        // Check color sequence
                         for (let i = 0; i <= laneBlocks.length - 3; i++) {
                             if (laneBlocks[i].colorIndex === laneBlocks[i+1].colorIndex && 
                                 laneBlocks[i+1].colorIndex === laneBlocks[i+2].colorIndex) {
-                                // Match found! Clear them
                                 const matched = [laneBlocks[i], laneBlocks[i+1], laneBlocks[i+2]];
                                 this.blocks = this.blocks.filter(b => !matched.includes(b));
                                 this.score += 30;
@@ -1216,7 +1258,6 @@
                 const cx = this.canvas.width / 2;
                 const cy = this.canvas.height / 2;
 
-                // Draw Central Hexagon
                 this.ctx.save();
                 this.ctx.translate(cx, cy);
                 this.ctx.rotate((this.hexAngle * Math.PI) / 3);
@@ -1226,8 +1267,8 @@
                     this.ctx.rotate((i * Math.PI) / 3);
                     this.ctx.beginPath();
                     this.ctx.moveTo(0, 0);
-                    this.ctx.lineTo(25, 0);
-                    this.ctx.lineTo(12.5, 21.65);
+                    this.ctx.lineTo(24, 0);
+                    this.ctx.lineTo(12, 20.78);
                     this.ctx.closePath();
                     this.ctx.fillStyle = this.colors[i % this.colors.length];
                     this.ctx.fill();
@@ -1235,7 +1276,6 @@
                 }
                 this.ctx.restore();
 
-                // Draw Incoming Blocks along 6 lanes
                 this.blocks.forEach(b => {
                     const angle = (b.lane * Math.PI) / 3;
                     const bx = cx + Math.cos(angle) * b.dist;
@@ -1245,7 +1285,7 @@
                     this.ctx.shadowColor = this.colors[b.colorIndex];
                     this.ctx.shadowBlur = 10;
                     this.ctx.beginPath();
-                    this.ctx.arc(bx, by, 8, 0, Math.PI * 2);
+                    this.ctx.arc(bx, by, 7, 0, Math.PI * 2);
                     this.ctx.fill();
                     this.ctx.shadowBlur = 0;
                 });
@@ -1255,7 +1295,7 @@
                     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
                     this.ctx.fillStyle = '#fe0099';
-                    this.ctx.font = 'bold 24px Inter';
+                    this.ctx.font = 'bold 22px Inter';
                     this.ctx.textAlign = 'center';
                     this.ctx.fillText('OVERFLOW', cx, cy - 15);
 
